@@ -1,0 +1,18 @@
+.AppBar {
+  background-color: #f36805;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Logo {
+  width: 80px;
+  height: 80px;
+  margin-left: 20px;
+}
+.Clock {
+  display: flex;
+  font-size: 250%;
+  align-items: center;
+}
