@@ -1,22 +1,11 @@
 import React from "react";
 import { Menu } from "antd";
-import { MailOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "./SideMenu.css";
 
-function SideMenu() {
+function SideMenu({ menuItems }) {
   const navigate = useNavigate();
-  function getItem(label, key, icon, children, type) {
-    return {
-      key,
-      icon,
-      children,
-      label,
-      type,
-    };
-  }
-
-  const items = [getItem("Users", "users", <MailOutlined />), getItem("Menu", "menu", <MailOutlined />), getItem("Tables", "tables", <MailOutlined />)];
+  const items = menuItems;
   const onClick = (e) => {
     navigate(`${e.key}`);
   };
