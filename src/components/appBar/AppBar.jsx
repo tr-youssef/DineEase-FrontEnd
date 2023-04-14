@@ -7,7 +7,7 @@ import Profil from "../profil/profil.jsx";
 function AppBar() {
   //Load avatar,name,role from backend
   const avatar = "https://i.pravatar.cc/100";
-  const name = "Margo Purcell";
+  const name = "ZIBUSISO MAFAITI";
   const role = "Manager";
 
   return (

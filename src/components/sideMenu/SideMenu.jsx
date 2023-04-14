@@ -16,8 +16,8 @@ function SideMenu({ menuItems }) {
         style={{
           width: 200,
         }}
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
+        defaultSelectedKeys={["users"]}
+        defaultOpenKeys={["users"]}
         mode="inline"
         items={items}
         className="Menu"
