@@ -3,7 +3,9 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Manager from "./pages/manager/Manager.jsx";
-import EditMenu from "./pages/editMenu/EditMenu.jsx";
+import Menu from "./pages/manager/menu/Menu.jsx";
+import Tables from "./pages/manager/tables/Tables.jsx";
+import Users from "./pages/manager/users/Users.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -17,7 +19,15 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/manager/menu",
-            element: <EditMenu />,
+            element: <Menu />,
+          },
+          {
+            path: "/manager/tables",
+            element: <Tables />,
+          },
+          {
+            path: "/manager/users",
+            element: <Users />,
           },
         ],
       },
