@@ -6,7 +6,7 @@ function Test() {
 
   useEffect(() => {
     let fetchData = async () => {
-      const message = await callAPI("http://localhost:5001/", "GET").then((res) => {
+      await callAPI("http://localhost:5001/", "GET").then((res) => {
         setData(res.message);
       });
     };

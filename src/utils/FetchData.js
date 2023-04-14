@@ -1,4 +1,4 @@
-export async function callAPI(url = "", methode, data = {}) {
+export async function callAPI(url = "", methode = "GET", data = {}) {
   const options = {
     method: methode,
     headers: {
