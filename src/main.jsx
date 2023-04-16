@@ -27,6 +27,10 @@ const router = createBrowserRouter([
             element: <Category />,
           },
           {
+            path: "/manager/menu/editcategory/:id",
+            element: <Category />,
+          },
+          {
             path: "/manager/tables",
             element: <Tables />,
           },

@@ -7,13 +7,12 @@ import CollapseMenu from "../../../components/collapse/CollapseMenu.jsx";
 import { token } from "../../../utils/token.js";
 import "./Menu.css";
 
-const categories = ["burgers", "Hot Dog", "Fries", "Drinks"];
 function Menu() {
-  const [data, setData] = useState("");
+  const [categories, setCategories] = useState("");
   useEffect(() => {
     let fetchData = async () => {
       await callAPI("http://localhost:5001/categories", "GET", "", token).then((res) => {
-        setData(res);
+        setCategories(res);
       });
     };
     fetchData();
@@ -26,7 +25,7 @@ function Menu() {
           Add category
         </Button>
       </Link>
-      <CollapseMenu categories={data} />
+      <CollapseMenu categories={categories} />
     </div>
   );
 }

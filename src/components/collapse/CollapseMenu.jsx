@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Collapse } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import "./CollapseMenu.css";
@@ -6,12 +7,13 @@ import "./CollapseMenu.css";
 function CollapseMenu({ categories }) {
   const { Panel } = Collapse;
   const [activeKey, setActiveKey] = useState("0");
+  const navigate = useNavigate();
   const onChange = (key) => {
     setActiveKey(key);
   };
-  function EditCategory(event) {
+  function EditCategory(event, id) {
     event.stopPropagation();
-    console.log("Edit");
+    navigate(`editcategory/${id}`);
   }
   function DeleteCategory(event) {
     event.stopPropagation();
@@ -29,10 +31,10 @@ function CollapseMenu({ categories }) {
                     {categorie.name}
                     <div className="HeaderIcons">
                       <div className="Icons">
-                        <EditFilled onClick={EditCategory} />
+                        <EditFilled onClick={(event) => EditCategory(event, categorie._id)} />
                       </div>
                       <div className="Icons">
-                        <DeleteFilled onClick={DeleteCategory} />
+                        <DeleteFilled onClick={(event) => DeleteCategory(event, categorie._id)} />
                       </div>
                     </div>
                   </div>
