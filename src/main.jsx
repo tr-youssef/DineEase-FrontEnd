@@ -6,6 +6,7 @@ import Manager from "./pages/manager/Manager.jsx";
 import Menu from "./pages/manager/menu/Menu.jsx";
 import Tables from "./pages/manager/tables/Tables.jsx";
 import Users from "./pages/manager/users/Users.jsx";
+import Category from "./pages/manager/menu/category/Category.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
           {
             path: "/manager/menu",
             element: <Menu />,
+          },
+          {
+            path: "/manager/menu/addcategory",
+            element: <Category />,
           },
           {
             path: "/manager/tables",

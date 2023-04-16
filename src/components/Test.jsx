@@ -12,6 +12,7 @@ function Test() {
     };
     fetchData();
   }, []);
+
   return <div>{data}</div>;
 }
 
