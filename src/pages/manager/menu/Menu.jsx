@@ -12,7 +12,7 @@ function Menu() {
   useEffect(() => {
     let fetchData = async () => {
       await callAPI("http://localhost:5001/categories", "GET", "", token).then((res) => {
-        setCategories(res);
+        if (!res.error) setCategories(res);
       });
     };
     fetchData();
@@ -25,7 +25,7 @@ function Menu() {
           Add category
         </Button>
       </Link>
-      <CollapseMenu categories={categories} />
+      <CollapseMenu categories={categories} setCategories={setCategories} />
     </div>
   );
 }
