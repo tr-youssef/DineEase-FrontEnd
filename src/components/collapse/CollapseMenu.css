@@ -9,3 +9,17 @@
 .Panel {
   color: #ffffff;
 }
+.ant-collapse-expand-icon {
+  color: #ffffff;
+}
+.Header {
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+}
+.HeaderIcons {
+  display: flex;
+}
+.Icons {
+  margin-right: 20px;
+}
