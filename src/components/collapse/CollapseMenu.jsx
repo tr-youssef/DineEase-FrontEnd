@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Collapse } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { callAPI } from "../../utils/FetchData.js";
 import { token } from "../../utils/token.js";
+import ItemCard from "../itemCard/ItemCard.jsx";
 import "./CollapseMenu.css";
 
 function CollapseMenu({ categories, setCategories }) {
@@ -42,7 +43,12 @@ function CollapseMenu({ categories, setCategories }) {
                 key={id}
                 className="Panel"
               >
-                <p>{categorie.name}</p>
+                <div className="Items">
+                  <ItemCard title={"Basic Burger"} price={14} description={"These burger patties are made with ground beef and an easy bread..."} img={"basic_burger.png"} />
+                  <ItemCard title={"Basic Burger"} price={14} description={"These burger patties are made with ground beef and an easy bread..."} img={"basic_burger.png"} />
+                  <ItemCard title={"Basic Burger"} price={14} description={"These burger patties are made with ground beef and an easy bread..."} img={"basic_burger.png"} />
+                  <ItemCard title={"Basic Burger"} price={14} description={"These burger patties are made with ground beef and an easy bread..."} img={"basic_burger.png"} />
+                </div>
               </Panel>
             );
           })}

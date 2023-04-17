@@ -23,3 +23,7 @@
 .Icons {
   margin-right: 20px;
 }
+.Items {
+  display: flex;
+  flex-wrap: wrap;
+}
