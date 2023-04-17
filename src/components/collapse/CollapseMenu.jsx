@@ -1,27 +1,29 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Collapse } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
+import { callAPI } from "../../utils/FetchData.js";
+import { token } from "../../utils/token.js";
 import "./CollapseMenu.css";
 
-function CollapseMenu({ categories }) {
+function CollapseMenu({ categories, setCategories }) {
+  const navigate = useNavigate();
   const { Panel } = Collapse;
-  const [activeKey, setActiveKey] = useState("0");
-  const onChange = (key) => {
-    setActiveKey(key);
-  };
-  function EditCategory(event) {
+  function EditCategory(event, id) {
     event.stopPropagation();
-    console.log("Edit");
+    navigate(`editcategory/${id}`);
   }
-  function DeleteCategory(event) {
+  function DeleteCategory(event, id) {
     event.stopPropagation();
-    console.log("Delete");
+    callAPI(`http://localhost:5001/categories/${id}`, "DELETE", {}, token).then((res) => {
+      if (res === "Category deleted") setCategories(categories.filter((category) => category._id !== id));
+    });
   }
   return (
     <div className="CollapseMenu">
-      <Collapse accordion className="Collapse" onChange={onChange}>
+      <Collapse accordion className="Collapse">
         {categories &&
-          categories?.map((categorie, id) => {
+          categories.map((categorie, id) => {
             return (
               <Panel
                 header={
@@ -29,10 +31,10 @@ function CollapseMenu({ categories }) {
                     {categorie.name}
                     <div className="HeaderIcons">
                       <div className="Icons">
-                        <EditFilled onClick={EditCategory} />
+                        <EditFilled onClick={(event) => EditCategory(event, categorie._id)} />
                       </div>
                       <div className="Icons">
-                        <DeleteFilled onClick={DeleteCategory} />
+                        <DeleteFilled onClick={(event) => DeleteCategory(event, categorie._id)} />
                       </div>
                     </div>
                   </div>
