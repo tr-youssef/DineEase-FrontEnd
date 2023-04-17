@@ -1,7 +1,8 @@
 import React from 'react';
 import { useRef, useState, useEffect } from 'react';
 
-const login = () => {
+
+const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
     const [user, setUser] = useState('');
@@ -9,13 +10,13 @@ const login = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState('');
 
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
+    // useEffect(() => {
+    //     userRef.current.focus();
+    // }, [])
     
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd])
+    }, [user, password])
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -57,4 +58,4 @@ const login = () => {
   )
 }
 
-export default login
+export default Login
