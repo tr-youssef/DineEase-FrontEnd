@@ -9,6 +9,7 @@ import Users from "./pages/manager/users/Users.jsx";
 import Category from "./pages/manager/menu/category/Category.jsx";
 import "./index.css";
 import SignIn from "./pages/login/SignIn.jsx";
+import Server from "./pages/server/Server.jsx";
 
 const router = createBrowserRouter([
   {  path: "/signin",
@@ -41,7 +42,11 @@ const router = createBrowserRouter([
             path: "/manager/users",
             element: <Users />,
           },
-        ],
+        ],{
+          
+        path: "server",
+        element: <Server />
+        }
       },
     ],
   },
