@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { Collapse } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { callAPI } from "../../utils/FetchData.js";
@@ -9,6 +9,7 @@ import "./CollapseMenu.css";
 
 function CollapseMenu({ categories, setCategories }) {
   const navigate = useNavigate();
+  const [items, setItems] = useState([]);
   const { Panel } = Collapse;
   function EditCategory(event, id) {
     event.stopPropagation();
@@ -20,9 +21,17 @@ function CollapseMenu({ categories, setCategories }) {
       if (res === "Category deleted") setCategories(categories.filter((category) => category._id !== id));
     });
   }
+  const onChange = (key) => {
+    setItems([]);
+    if (key.length !== 0) {
+      callAPI(`http://localhost:5001/items/getitems/${categories[key]._id}`, "GET", {}, token).then((res) => {
+        setItems(res);
+      });
+    }
+  };
   return (
     <div className="CollapseMenu">
-      <Collapse accordion className="Collapse">
+      <Collapse accordion className="Collapse" onChange={onChange}>
         {categories &&
           categories.map((categorie, id) => {
             return (
@@ -43,11 +52,18 @@ function CollapseMenu({ categories, setCategories }) {
                 key={id}
                 className="Panel"
               >
-                <div className="Items">
-                  <ItemCard title={"Basic Burger"} price={14} description={"These burger patties are made with ground beef and an easy bread..."} img={"basic_burger.png"} />
-                  <ItemCard title={"Basic Burger"} price={14} description={"These burger patties are made with ground beef and an easy bread..."} img={"basic_burger.png"} />
-                  <ItemCard title={"Basic Burger"} price={14} description={"These burger patties are made with ground beef and an easy bread..."} img={"basic_burger.png"} />
-                  <ItemCard title={"Basic Burger"} price={14} description={"These burger patties are made with ground beef and an easy bread..."} img={"basic_burger.png"} />
+                <div className="ItemsMenu">
+                  {items.map((item) => {
+                    return (
+                      <Link to={`edititem/${item._id}`} key={item._id}>
+                        <ItemCard title={item.name} price={item.price} description={item.description} img={item.picture} />
+                      </Link>
+                    );
+                  })}
+
+                  <Link to={"additem"}>
+                    <ItemCard title={"Add new items"} img={"plus_sign.png"} />
+                  </Link>
                 </div>
               </Panel>
             );

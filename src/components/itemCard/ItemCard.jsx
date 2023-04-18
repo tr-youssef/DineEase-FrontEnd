@@ -6,7 +6,7 @@ function ItemCard({ title, price, description, img }) {
   return (
     <div className="ItemCard">
       <div className="ItemCardImg">
-        <img src={`/src/assets/itemsMenu/${img}`} alt={img} />
+        <img src={`/src/assets/itemsMenu/${img}`} alt={img} className="ImgCard" />
       </div>
       <Card
         style={{
@@ -18,8 +18,10 @@ function ItemCard({ title, price, description, img }) {
       >
         <div className="ItemCardTitlePriceDescription">
           <div className="ItemCardTitlePrice">
-            <p className="ItemCardTitle">{title} </p>
-            <p className="ItemCardPrice">{price} CAD</p>
+            <p className="ItemCardTitle">{title}</p>
+            <p className="ItemCardPrice">
+              {price} {price && "CAD"}
+            </p>
           </div>
           <div className="ItemCardDescription">{description}</div>
         </div>

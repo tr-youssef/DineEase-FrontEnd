@@ -7,6 +7,7 @@ import Menu from "./pages/manager/menu/Menu.jsx";
 import Tables from "./pages/manager/tables/Tables.jsx";
 import Users from "./pages/manager/users/Users.jsx";
 import Category from "./pages/manager/menu/category/Category.jsx";
+import Items from "./pages/manager/menu/items/Items.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
           {
             path: "/manager/menu/editcategory/:id",
             element: <Category />,
+          },
+          {
+            path: "/manager/menu/additem",
+            element: <Items />,
+          },
+          {
+            path: "/manager/menu/edititem/:id",
+            element: <Items />,
           },
           {
             path: "/manager/tables",
