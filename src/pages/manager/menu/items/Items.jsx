@@ -75,7 +75,6 @@ function Items() {
     });
   };
   const onFinish = (values) => {
-    console.log("values", values.upload[0]);
     if (location.pathname.split("/")[3] === "additem") {
       const data = { name: values.name, price: values.price, description: values.description, categoryId: id.id, picture: values.upload[0].name };
       callAPI(`http://localhost:5001/items`, "POST", data, token).then(() => {
