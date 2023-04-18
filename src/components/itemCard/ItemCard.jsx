@@ -6,7 +6,7 @@ function ItemCard({ title, price, description, img }) {
   return (
     <div className="ItemCard">
       <div className="ItemCardImg">
-        <img src={`/src/assets/itemsMenu/${img}`} alt={img} className="ImgCard" />
+        <img src={`http://localhost:5001/assets/${img}`} alt={img} className="ImgCard" />
       </div>
       <Card
         style={{

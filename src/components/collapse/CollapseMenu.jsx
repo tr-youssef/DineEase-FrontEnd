@@ -61,7 +61,7 @@ function CollapseMenu({ categories, setCategories }) {
                     );
                   })}
 
-                  <Link to={"additem"}>
+                  <Link to={`additem/${categorie._id}`}>
                     <ItemCard title={"Add new items"} img={"plus_sign.png"} />
                   </Link>
                 </div>

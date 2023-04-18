@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             element: <Category />,
           },
           {
-            path: "/manager/menu/additem",
+            path: "/manager/menu/additem/:id",
             element: <Items />,
           },
           {
