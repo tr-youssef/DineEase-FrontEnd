@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useNavigate } from "react-router-dom"
 import { callAPI } from '../../utils/FetchData';
-import loginImage from '../../assets/WebsiteImage.png'
-import logoImage from '../../assets/Logo1.png'
+import loginImage from '../../assets/WebsiteImage.png';
+import logoImage from '../../assets/Logo1.png';
 
 const SignIn = () => {
   const navigate = useNavigate()
@@ -22,12 +22,12 @@ const onFinishFailed = (errorInfo) => {
   return (
     
     <div style={{display: 'flex'}}>
-      <div style={{flex: 1}}>
-        <img src={loginImage} style={{ objectFit: 'contain', width: '100%', height: '100%%' }}  ></img>
+      <div style={{flex: 1, overflow: 'hidden', width: '100%', height: '99vh' }}>
+        <img src={loginImage} style={{}}  ></img>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <div style={{ flex: 1 , display:'flex', justifyContent: 'right', position:'relative' }}>
-          <img src={logoImage} style={{ objectFit: 'contain', width: '20%', height: '20%%', top:0, right:0, position:'absolute'}}  ></img>
+        <div style={{ flex: 1 , display:'flex', justifyContent: 'right', position:'relative' ,marginBottom:'200px' }}>
+          <img src={logoImage} style={{ objectFit: 'contain', width: '20%', height: '20%%', top:0, right:50, position:'absolute'}}  ></img>
         </div>
         <div style={{ flex: 3 }}>
         <Form
