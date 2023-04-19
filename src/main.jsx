@@ -8,6 +8,8 @@ import Tables from "./pages/manager/tables/Tables.jsx";
 import Users from "./pages/manager/users/Users.jsx";
 import Category from "./pages/manager/menu/category/Category.jsx";
 import Items from "./pages/manager/menu/items/Items.jsx";
+import TakeOrder from "./pages/server/TakeOrder/TakeOrder.jsx";
+import Server from "./pages/server/Server.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
             element: <Users />,
           },
         ],
+      },
+      {
+        path: "server",
+        element: <Server />,
+      },
+      {
+        path: "server/takeorder/:id",
+        element: <TakeOrder />,
       },
     ],
   },
