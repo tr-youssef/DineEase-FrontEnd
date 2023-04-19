@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Collapse } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { callAPI } from "../../utils/FetchData.js";
 import { token } from "../../utils/token.js";
+import ItemCard from "../itemCard/ItemCard.jsx";
 import "./CollapseMenu.css";
 
 function CollapseMenu({ categories, setCategories }) {
   const navigate = useNavigate();
+  const [items, setItems] = useState([]);
   const { Panel } = Collapse;
   function EditCategory(event, id) {
     event.stopPropagation();
@@ -19,9 +21,17 @@ function CollapseMenu({ categories, setCategories }) {
       if (res === "Category deleted") setCategories(categories.filter((category) => category._id !== id));
     });
   }
+  const onChange = (key) => {
+    setItems([]);
+    if (key.length !== 0) {
+      callAPI(`http://localhost:5001/items/getitems/${categories[key]._id}`, "GET", {}, token).then((res) => {
+        setItems(res);
+      });
+    }
+  };
   return (
     <div className="CollapseMenu">
-      <Collapse accordion className="Collapse">
+      <Collapse accordion className="Collapse" onChange={onChange}>
         {categories &&
           categories.map((categorie, id) => {
             return (
@@ -42,7 +52,19 @@ function CollapseMenu({ categories, setCategories }) {
                 key={id}
                 className="Panel"
               >
-                <p>{categorie.name}</p>
+                <div className="ItemsMenu">
+                  {items.map((item) => {
+                    return (
+                      <Link to={`edititem/${item._id}`} key={item._id}>
+                        <ItemCard title={item.name} price={item.price} description={item.description} img={item.picture} />
+                      </Link>
+                    );
+                  })}
+
+                  <Link to={`additem/${categorie._id}`}>
+                    <ItemCard title={"Add new items"} img={"plus_sign.png"} />
+                  </Link>
+                </div>
               </Panel>
             );
           })}

@@ -23,3 +23,7 @@
 .Icons {
   margin-right: 20px;
 }
+.ItemsMenu {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -57,7 +57,6 @@ function Category() {
           <div>
             <Form.Item
               label="Name of the category"
-              className="categoryLabelInput"
               name="name"
               style={{ fontSize: "24px" }}
               rules={[
@@ -67,7 +66,7 @@ function Category() {
                 },
               ]}
             >
-              <Input className="categoryInput" placeholder="Enter the name of the category" />
+              <Input className="CategoryInput" placeholder="Enter the name of the category" />
             </Form.Item>
           </div>
           <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
