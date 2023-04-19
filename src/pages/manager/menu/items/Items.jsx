@@ -8,15 +8,7 @@ import "./Items.css";
 
 function Items() {
   const navigate = useNavigate();
-  const { TextArea } = Input;
   const id = useParams();
-  const location = useLocation();
-  const normFile = (e) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
   const [fields, setFields] = useState([
     {
       name: ["name"],
@@ -34,7 +26,22 @@ function Items() {
       name: ["picture"],
       value: "",
     },
+    {
+      name: ["categoryId"],
+      value: "",
+    },
   ]);
+  const [fileList, setFileList] = useState([]);
+  const { TextArea } = Input;
+  const handleClick = () => {
+    navigate("/manager/menu");
+  };
+  const normFile = (e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
+  };
   useEffect(() => {
     if (location.pathname.split("/")[3] === "edititem") {
       let fetchData = async () => {
@@ -66,14 +73,17 @@ function Items() {
       fetchData();
     }
   }, []);
-  const handleClick = () => {
-    navigate("/manager/menu");
-  };
-  const deleteItem = () => {
-    callAPI(`http://localhost:5001/items/${id.id}`, "DELETE", {}, token).then(() => {
-      navigate("/manager/menu");
-    });
-  };
+  useEffect(() => {
+    fields[3].value &&
+      setFileList([
+        {
+          uid: "-1",
+          name: fields[3].value,
+          status: "done",
+          url: `http://localhost:5001/assets/${fields[3].value}`,
+        },
+      ]);
+  }, [fields]);
   const onFinish = (values) => {
     if (location.pathname.split("/")[3] === "additem") {
       const data = { name: values.name, price: values.price, description: values.description, categoryId: id.id, picture: values.upload[0].name };
@@ -81,7 +91,7 @@ function Items() {
         navigate("/manager/menu");
       });
     } else {
-      const data = { name: values.name, price: values.price, description: values.description, categoryId: fields[4].value, picture: values.upload[0].name };
+      const data = { name: values.name, price: values.price, description: values.description, categoryId: fields[4].value, picture: fileList[0].name };
       callAPI(`http://localhost:5001/items/${id.id}`, "PATCH", data, token).then(() => {
         navigate("/manager/menu");
       });
@@ -90,25 +100,20 @@ function Items() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const [fileList, setFileList] = useState([]);
-  const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-  };
-  const onPreview = async (file) => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
     }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
+    setPreviewImage(file.url || file.preview);
+    setPreviewOpen(true);
+    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
   };
-
+  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+  const deleteItem = () => {
+    callAPI(`http://localhost:5001/items/${id.id}`, "DELETE", {}, token).then(() => {
+      navigate("/manager/menu");
+    });
+  };
   return (
     <div className="Items">
       <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
@@ -159,9 +164,9 @@ function Items() {
               </Form.Item>
             </div>
             <div className="ItemsInputLine">
-              <Form.Item name="upload" label="Upload" valuePropName="fileList" getValueFromEvent={normFile}>
-                <Upload action="http://localhost:5001/upload/item" listType="picture-card" fileList={fileList} onChange={onChange} onPreview={onPreview} maxCount={1}>
-                  {fileList.length < 1 && "+ Upload"}
+              <Form.Item name="upload" label="Upload" getValueFromEvent={normFile}>
+                <Upload action="http://localhost:5001/upload/item" listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange} maxCount={1}>
+                  {fileList.length >= 1 ? null : "Upload"}
                 </Upload>
               </Form.Item>
             </div>
@@ -181,5 +186,4 @@ function Items() {
     </div>
   );
 }
-
 export default Items;
