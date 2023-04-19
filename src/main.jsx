@@ -8,11 +8,16 @@ import Tables from "./pages/manager/tables/Tables.jsx";
 import Users from "./pages/manager/users/Users.jsx";
 import Category from "./pages/manager/menu/category/Category.jsx";
 import "./index.css";
-import Login from "./login.jsx";
+import SignIn from "./pages/login/SignIn.jsx";
+import Server from "./pages/server/Server.jsx";
+
+
+
+
 
 const router = createBrowserRouter([
-  {  path: "/login",
-    element: <Login />},
+  {  path: "/signin",
+    element: <SignIn />},
   {
     path: "/",
     element: <App />,
@@ -43,6 +48,14 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+      path: "server",
+      element: <Server />
+      },
+      {
+      path: "jajajajaja",
+      element: <Server />
+      }
     ],
   },
 ]);
