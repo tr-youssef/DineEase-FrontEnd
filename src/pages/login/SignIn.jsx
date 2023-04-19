@@ -12,7 +12,7 @@ const SignIn = () => {
     console.log(user)
   if (user) {
     window.localStorage.setItem("token", user.token)
-    navigate(`/${user.existingUser.role}`) 
+    navigate(`/${user.result.role}`) 
   }
 };
 
