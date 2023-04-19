@@ -10,7 +10,7 @@ function TakeOrder() {
   return (
     <div className="TakeOrder">
       <CollapseMenu table={id} order={order} setOrder={setOrder} />
-      <Order order={order} setOrder={setOrder} />
+      <Order order={order} setOrder={setOrder} key={order.length} />
     </div>
   );
 }
