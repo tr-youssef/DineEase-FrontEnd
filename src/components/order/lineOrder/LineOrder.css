@@ -1,0 +1,32 @@
+.LineOrder {
+  width: 325px;
+  height: 57px;
+  display: flex;
+  color: #ffffff;
+  padding: 0 33px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.NamePrice {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  gap: 5px;
+}
+.QuantityButton {
+  display: flex;
+  justify-content: space-between;
+  width: 125px;
+}
+.Quantity {
+  display: flex;
+  align-items: center;
+}
+.Name {
+  font-size: 16px;
+}
+.Price {
+  font-size: 16px;
+  color: rgba(217, 217, 217, 0.8);
+}
