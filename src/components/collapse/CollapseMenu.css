@@ -1,7 +1,7 @@
 .CollapseMenu {
-  margin-top: 110px;
-  margin-left: 157px;
-  width: 946px;
+  margin-top: 72px;
+  margin-left: 50px;
+  width: 60vw;
 }
 .Collapse {
   background-color: #f36805;
@@ -26,4 +26,7 @@
 .ItemsMenu {
   display: flex;
   flex-wrap: wrap;
+}
+.ItemMenu:hover {
+  cursor: pointer;
 }
