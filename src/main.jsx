@@ -25,77 +25,41 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/manager/menu",
-            element: (
-              <RequireAuth isAllowed={"manager"}>
-                <Menu />
-              </RequireAuth>
-            ),
+            element: <RequireAuth children={<Menu />} isAllowed={"manager"} />,
           },
           {
             path: "/manager/menu/addcategory",
-            element: (
-              <RequireAuth isAllowed={"manager"}>
-                <Category />
-              </RequireAuth>
-            ),
+            element: <RequireAuth children={<Category />} isAllowed={"manager"} />,
           },
           {
             path: "/manager/menu/editcategory/:id",
-            element: (
-              <RequireAuth isAllowed={"manager"}>
-                <Category />
-              </RequireAuth>
-            ),
+            element: <RequireAuth children={<Category />} isAllowed={"manager"} />,
           },
           {
             path: "/manager/menu/additem/:id",
-            element: (
-              <RequireAuth isAllowed={"manager"}>
-                <Items />
-              </RequireAuth>
-            ),
+            element: <RequireAuth children={<Items />} isAllowed={"manager"} />,
           },
           {
             path: "/manager/menu/edititem/:id",
-            element: (
-              <RequireAuth isAllowed={"manager"}>
-                <Items />
-              </RequireAuth>
-            ),
+            element: <RequireAuth children={<Items />} isAllowed={"manager"} />,
           },
           {
             path: "/manager/tables",
-            element: (
-              <RequireAuth isAllowed={"manager"}>
-                <Tables />
-              </RequireAuth>
-            ),
+            element: <RequireAuth children={<Tables />} isAllowed={"manager"} />,
           },
           {
             path: "/manager/users",
-            element: (
-              <RequireAuth isAllowed={"manager"}>
-                <Users />
-              </RequireAuth>
-            ),
+            element: <RequireAuth children={<Users />} isAllowed={"manager"} />,
           },
         ],
       },
       {
         path: "server",
-        element: (
-          <RequireAuth isAllowed={"server"}>
-            <Server />
-          </RequireAuth>
-        ),
+        element: <RequireAuth children={<Server />} isAllowed={"server"} />,
       },
       {
         path: "server/takeorder/:id",
-        element: (
-          <RequireAuth isAllowed={"server"}>
-            <TakeOrder />
-          </RequireAuth>
-        ),
+        element: <RequireAuth children={<TakeOrder />} isAllowed={"server"} />,
       },
     ],
   },
