@@ -2,7 +2,7 @@ import {  useEffect,  useState } from 'react';
 import { useParams } from "react-router-dom";
 import { token } from "../../../utils/token.js";
 import { callAPI } from "../../../utils/FetchData.js"
-import {Table } from 'antd';
+import AntTable from '../../../components/AntTable/AntTable.jsx';
 import "./Users.css";
 
 export function Users() {
@@ -19,32 +19,31 @@ export function Users() {
   }, []);
   const Columns = [
     {
-      title: 'Fristname',
+      title: 'Frist Name',
       dataIndex: 'firstName',
       key:"firstName",
-      width: '30%',
-      editable: true,
+      width: '20%',
     }, {
-      title: 'Lastname',
+      title: 'Last Name',
       dataIndex: 'lastName',
       key:"lastName",
-      width: '30%',
-      editable: true,
+      width: '20%',
     },
     {
-      title: 'role',
+      title: 'Role',
       dataIndex: 'role',
       key:"role",
+      width: '20%',
     },
     {
-      title: 'email',
+      title: 'Email',
       dataIndex: 'email',
       key:"email",
     },
   ];
   
   return (
-    <Table dataSource={dataSource} columns={Columns} />
+    <AntTable dataSource={dataSource} Columns={Columns}/> 
   );
 
 };
