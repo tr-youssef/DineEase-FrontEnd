@@ -1,0 +1,14 @@
+.Icons {
+    margin-left: 20px;
+    letter-spacing: 5px;
+}
+
+.editIcon {
+    color: #F36805;
+}
+
+.deleteIcon {
+    color: #F36805;
+    margin-left: 20px;
+    padding-left: 20px;
+}

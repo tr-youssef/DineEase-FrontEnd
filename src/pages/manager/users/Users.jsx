@@ -2,6 +2,8 @@ import {  useEffect,  useState } from 'react';
 import { useParams } from "react-router-dom";
 import { token } from "../../../utils/token.js";
 import { callAPI } from "../../../utils/FetchData.js"
+import { ArrowLeftOutlined } from "@ant-design/icons";
+import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import AntTable from '../../../components/AntTable/AntTable.jsx';
 import "./Users.css";
 
@@ -39,6 +41,24 @@ export function Users() {
       title: 'Email',
       dataIndex: 'email',
       key:"email",
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      key:"action",
+      width: "20%", 
+      render: (text, record) => (
+        <div className='Icons'>
+          <EditFilled 
+            className='editIcon'
+            onClick={(event) => EditEmployee(event, Users._id)}
+          />
+          <DeleteFilled 
+            className='deleteIcon'
+            onClick={(event) => DeleteEmployee(event, Users._id)}
+          />
+        </div>
+      ),
     },
   ];
   
