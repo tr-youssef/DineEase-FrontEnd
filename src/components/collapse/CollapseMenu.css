@@ -1,6 +1,6 @@
 .CollapseMenu {
-  margin-top: 110px;
-  margin-left: 157px;
+  margin-top: 72px;
+  margin-left: 50px;
   width: 946px;
 }
 .Collapse {
@@ -26,4 +26,7 @@
 .ItemsMenu {
   display: flex;
   flex-wrap: wrap;
+}
+.ItemMenu:hover {
+  cursor: pointer;
 }
