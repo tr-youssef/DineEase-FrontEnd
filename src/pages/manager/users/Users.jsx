@@ -2,13 +2,41 @@ import {  useEffect,  useState } from 'react';
 import { useParams } from "react-router-dom";
 import { token } from "../../../utils/token.js";
 import { callAPI } from "../../../utils/FetchData.js"
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
+import { Button, Form, Input } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import AntTable from '../../../components/AntTable/AntTable.jsx';
 import "./Users.css";
 
 export function Users() {
   const id = useParams();
+  const [fields, setFields] = useState([
+    {
+      name: ["firstName"],
+      value: "",
+    },
+    {
+      name: ["email"],
+      value: "",
+    },
+    {
+      name: ["role"],
+      value: "",
+    },
+    {
+      name: ["password"],
+      value: "",
+    },
+    {
+      name: ["restaurantId"],
+      value: "",
+    },
+  ]);
+  const { TextArea } = Input;
+  const handleClick = () => {
+    navigate("/manager/users");
+  };
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
       let fetchData = async () => {
@@ -60,10 +88,19 @@ export function Users() {
         </div>
       ),
     },
+  
   ];
   
   return (
+    <>
     <AntTable dataSource={dataSource} Columns={Columns}/> 
+    <Link to={"addEmployee"} />
+        <Button className='employee-button' icon={<PlusCircleOutlined />} size={"large"}> 
+          Add Employee
+        </Button>
+    <Link/>
+    </>
+
   );
 
 };

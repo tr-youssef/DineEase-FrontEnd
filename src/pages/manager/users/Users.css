@@ -10,5 +10,14 @@
 .deleteIcon {
     color: #F36805;
     margin-left: 20px;
-    padding-left: 20px;
+}
+
+.employee-button {
+    background: #f36805;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-top: 60px;
+    left: 75.5%;
+    position: absolute;
+
 }
