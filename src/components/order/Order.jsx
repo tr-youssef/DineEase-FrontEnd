@@ -3,10 +3,6 @@ import "./Order.css";
 import LineOrder from "./lineOrder/LineOrder.jsx";
 
 function Order({ order, setOrder }) {
-  const [orders, setOrders] = useState([]);
-  useEffect(() => {
-    setOrders(order);
-  }, [order]);
   return (
     <div className="Order">
       <div className="Title">Order</div>
