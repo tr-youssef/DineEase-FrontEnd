@@ -1,0 +1,15 @@
+.Order {
+  width: 390px;
+  min-height: 600px;
+  margin-top: 72px;
+  background-color: #f36805;
+  border-radius: 20px;
+  margin-left: 20px;
+  text-align: center;
+}
+.Title {
+  margin-top: 32px;
+  font-size: 24px;
+  color: #ffffff;
+  margin-bottom: 42px;
+}

@@ -8,63 +8,95 @@ import Tables from "./pages/manager/tables/Tables.jsx";
 import Users from "./pages/manager/users/Users.jsx";
 import Category from "./pages/manager/menu/category/Category.jsx";
 import Items from "./pages/manager/menu/items/Items.jsx";
-import "./index.css";
+import TakeOrder from "./pages/server/TakeOrder/TakeOrder.jsx";
 import SignIn from "./pages/login/SignIn.jsx";
 import Server from "./pages/server/Server.jsx";
-
-
-
-
+import RequireAuth from "./utils/RequireAuth.jsx";
 
 const router = createBrowserRouter([
-  {  path: "/signin",
-    element: <SignIn />},
+  { path: "/signin", element: <SignIn /> },
   {
     path: "/",
-    element: <App />,
+    element: <RequireAuth children={<App />} isAllowed={"all"} />,
     children: [
       {
         path: "manager",
-        element: <Manager />,
+        element: <RequireAuth children={<Manager />} isAllowed={"manager"} />,
         children: [
           {
             path: "/manager/menu",
-            element: <Menu />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Menu />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/menu/addcategory",
-            element: <Category />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Category />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/menu/editcategory/:id",
-            element: <Category />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Category />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/menu/additem/:id",
-            element: <Items />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Items />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/menu/edititem/:id",
-            element: <Items />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Items />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/tables",
-            element: <Tables />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Tables />
+              </RequireAuth>
+            ),
           },
           {
             path: "/manager/users",
-            element: <Users />,
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Users />
+              </RequireAuth>
+            ),
           },
         ],
       },
       {
-      path: "server",
-      element: <Server />
+        path: "server",
+        element: (
+          <RequireAuth isAllowed={"server"}>
+            <Server />
+          </RequireAuth>
+        ),
       },
       {
-      path: "jajajajaja",
-      element: <Server />
-      }
+        path: "server/takeorder/:id",
+        element: (
+          <RequireAuth isAllowed={"server"}>
+            <TakeOrder />
+          </RequireAuth>
+        ),
+      },
     ],
   },
 ]);
