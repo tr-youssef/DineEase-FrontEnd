@@ -9,11 +9,6 @@ const parseJwt = (token) => {
 };
 function RequireAuth({ children, isAllowed }) {
   let auth = JSON.parse(localStorage.getItem("user"));
-  // console.log("isAllowed !== auth.role", isAllowed !== auth.role);
-  // console.log("isAllowed", isAllowed);
-  // console.log("auth.role", auth.role);
-  // console.log('isAllowed !== "all"', isAllowed !== "all");
-
   if (!auth) {
     return <Navigate to="/signin" replace={true} />;
   } else if (auth.role !== isAllowed && isAllowed !== "all") {
