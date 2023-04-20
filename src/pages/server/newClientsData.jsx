@@ -4,6 +4,7 @@ import ordericonimage from '../../assets/OrderIcon.png';
 
 
 const columns = [
+  
   {
     title: 'Table Number',
     dataIndex: 'name',
@@ -19,14 +20,11 @@ const columns = [
   {
     title: 'Order',
     key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-      </Space>
-    ),
+    key: 'action'
   },
 ];
 const data = [
+  
   {
     key: '1',
     name: 'Table 1',
@@ -45,5 +43,10 @@ const data = [
     seats: 10,
   },
 ];
-const NewClientData = () => <Table columns={columns} dataSource={data} />;
+const NewClientData = () => {
+
+  return (
+    <Table columns={columns} dataSource={data} />
+  )
+}
 export default NewClientData;
