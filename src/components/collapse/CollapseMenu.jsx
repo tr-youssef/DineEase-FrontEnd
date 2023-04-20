@@ -40,8 +40,14 @@ function CollapseMenu({ table, order, setOrder }) {
   }
   function onClick(id, name, price) {
     const index = order.findIndex((x) => x.id === id);
-    if (index === -1) order.push({ id: id, name: name, price: price, quantity: 1 });
-    setOrder(order);
+    if (index === -1) {
+      const newOrder = [...order, { id: id, name: name, price: price, quantity: 1 }];
+      setOrder(newOrder);
+    } else {
+      const newOrder = [...order];
+      newOrder[index].quantity++;
+      setOrder(newOrder);
+    }
   }
   return (
     <div className="CollapseMenu">

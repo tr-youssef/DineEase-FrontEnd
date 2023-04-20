@@ -5,10 +5,10 @@ import Clock from "../clock/Clock.jsx";
 import Profil from "../profil/profil.jsx";
 
 function AppBar() {
-  //Load avatar,name,role from backend
+  let auth = JSON.parse(localStorage.getItem("user"));
   const avatar = "https://i.pravatar.cc/100";
-  const name = "ZIBUSISO MAFAITI";
-  const role = "Manager";
+  const name = auth.firstName + " " + auth.lastName;
+  const role = auth.role;
 
   return (
     <div className="AppBar">
