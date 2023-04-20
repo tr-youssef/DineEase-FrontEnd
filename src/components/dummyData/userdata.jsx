@@ -1,0 +1,58 @@
+const users = [
+  {
+    firstName: "manager",
+    lastName: "manager",
+    email: "manager@gmail.com",
+    role: "manager",
+    active: true,
+    password: "password123",
+    restaurantId: "6438e2a33553b1591f6f85e4",
+  },
+  {
+    firstName: "server",
+    lastName: "server",
+    email: "aliceserver@gmail.com",
+    role: "server",
+    active: true,
+    password: "password123",
+    restaurantId: "6438e2a33553b1591f6f85e4",
+  },
+  {
+    firstName: "server2",
+    lastName: "server2",
+    email: "aliceserver2@gmail.com",
+    role: "server",
+    active: true,
+    password: "password123",
+    restaurantId: "6438e2a33553b1591f6f85e4",
+  },
+  {
+    firstName: "chef",
+    lastName: "chef",
+    email: "chef@gmail.com",
+    role: "chef",
+    active: true,
+    password: "password123",
+    restaurantId: "6438e2a33553b1591f6f85e4",
+  },
+  {
+    firstName: "chef2",
+    lastName: "chef2",
+    email: "chef@gmail2.com",
+    role: "chef",
+    active: true,
+    password: "password123",
+    restaurantId: "6438e2a33553b1591f6f85e4",
+  },
+  {
+    firstName: "receptionist",
+    lastName: "receptionist",
+    email: "receptionist@gmail.com",
+    role: "receptionist",
+    active: true,
+    password: "password123",
+    restaurantId: "6438e2a33553b1591f6f85e4",
+  },
+];
+
+export default users;
