@@ -1,10 +1,14 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React from "react";
 import { Button } from "antd";
+import { useParams, useNavigate } from "react-router-dom";
 import LineOrder from "./lineOrder/LineOrder.jsx";
 import TotalPrice from "../totalPrice/TotalPrice.jsx";
+import { callAPI } from "../../utils/FetchData.js";
 import "./Order.css";
 
-function Order({ order, setOrder }) {
+function Order({ booked, order, setOrder }) {
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
   function sum() {
     const sum = order.reduce(add, 0);
     function add(accumulator, a) {
@@ -13,7 +17,21 @@ function Order({ order, setOrder }) {
     return sum;
   }
   const item = sum();
-  function takeOrder() {}
+
+  function takeOrder() {
+    const data = {
+      bookedId: booked,
+      userId: user.userId,
+      items: order,
+      subTotalAmount: item,
+      tax: Math.round((item * 0.05 + Number.EPSILON) * 100) / 100,
+      totalAmount: Math.round((item + item * 0.05 + Number.EPSILON) * 100) / 100,
+      status: "New",
+    };
+    callAPI("http://localhost:5001/orders", "POST", data, user.token).then(() => {
+      navigate("/server");
+    });
+  }
   return (
     <div className="Order">
       <div className="OrderTop">

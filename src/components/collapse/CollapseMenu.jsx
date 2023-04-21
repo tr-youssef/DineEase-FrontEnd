@@ -6,7 +6,7 @@ import { callAPI } from "../../utils/FetchData.js";
 import ItemCard from "../itemCard/ItemCard.jsx";
 import "./CollapseMenu.css";
 
-function CollapseMenu({ table, order, setOrder }) {
+function CollapseMenu({ booked, order, setOrder }) {
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("user")).token;
   const [categories, setCategories] = useState("");
@@ -59,7 +59,7 @@ function CollapseMenu({ table, order, setOrder }) {
                 header={
                   <div className="Header">
                     {categorie.name}
-                    {!table && (
+                    {!booked && (
                       <div className="HeaderIcons">
                         <div className="Icons">
                           <EditFilled onClick={(event) => EditCategory(event, categorie._id)} />
@@ -75,8 +75,8 @@ function CollapseMenu({ table, order, setOrder }) {
                 className="Panel"
               >
                 <div className="ItemsMenu">
-                  {items.map((item) => {
-                    return table ? (
+                  {items?.map((item) => {
+                    return booked ? (
                       <div
                         onClick={() => {
                           onClick(item._id, item.name, item.price);
@@ -93,7 +93,7 @@ function CollapseMenu({ table, order, setOrder }) {
                     );
                   })}
 
-                  {!table && (
+                  {!booked && (
                     <Link to={`additem/${categorie._id}`}>
                       <ItemCard title={"Add new items"} img={"plus_sign.png"} />
                     </Link>

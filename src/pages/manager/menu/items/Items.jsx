@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Input, Button, Form, Upload } from "antd";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { callAPI } from "../../../../utils/FetchData.js";
 import "./Items.css";
@@ -8,7 +8,7 @@ import "./Items.css";
 function Items() {
   const navigate = useNavigate();
   const id = useParams();
-  const token = localStorage.getItem("user").token;
+  const token = JSON.parse(localStorage.getItem("user")).token;
   const [fields, setFields] = useState([
     {
       name: ["name"],

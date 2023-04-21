@@ -9,8 +9,8 @@ function TakeOrder() {
   const [order, setOrder] = useState([]);
   return (
     <div className="TakeOrder">
-      <CollapseMenu table={id} order={order} setOrder={setOrder} />
-      <Order order={order} setOrder={setOrder} key={order.length} />
+      <CollapseMenu booked={id} order={order} setOrder={setOrder} />
+      <Order booked={id} order={order} setOrder={setOrder} key={order.length} />
     </div>
   );
 }
