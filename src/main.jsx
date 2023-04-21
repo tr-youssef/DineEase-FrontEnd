@@ -5,6 +5,7 @@ import App from "./App";
 import Manager from "./pages/manager/Manager.jsx";
 import Menu from "./pages/manager/menu/Menu.jsx";
 import Tables from "./pages/manager/tables/Tables.jsx";
+import Employee from "./pages/manager/users/Employee/Employee.jsx";
 import Users from "./pages/manager/users/Users.jsx";
 import Category from "./pages/manager/menu/category/Category.jsx";
 import Items from "./pages/manager/menu/items/Items.jsx";
@@ -76,6 +77,14 @@ const router = createBrowserRouter([
             element: (
               <RequireAuth isAllowed={"manager"}>
                 <Users />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/users/addEmployee",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <Employee />
               </RequireAuth>
             ),
           },

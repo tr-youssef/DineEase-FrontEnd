@@ -17,7 +17,16 @@
     color: #FFFFFF;
     font-size: 16px;
     margin-top: 60px;
-    left: 75.5%;
-    position: absolute;
+}
 
+.employeeButton {
+    float: right;
+    float: right;
+}
+
+.employess {
+    padding-top: 38px;
+    padding-left: 107px;
+    margin-top: 72px;
+    margin-left: 50px;
 }
