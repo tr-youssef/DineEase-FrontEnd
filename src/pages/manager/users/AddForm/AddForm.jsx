@@ -34,10 +34,6 @@ export function AddForm () {
       name: ["confirmPassword"],
       value: "",
     },
-    {
-      name: ["restaurantId"],
-      value: "",
-    },
   ]);
 
   const handleClick = () => {
@@ -50,9 +46,8 @@ export function AddForm () {
       lastName: values.lastName,
       email: values.email,
       role: values.role,
-      password: values.password,
-      confirmPassword: values.confirmPassword,
-      restaurantId: values.restaurantId,
+      password: values.role,
+      confirmPassword: values.role,
     };
 
     if (Object.keys(id).length === 0) {
@@ -152,19 +147,6 @@ export function AddForm () {
               ]}
             >
               <Input className="EmployeeInput" placeholder="Re-enter the password of the employee" />
-            </Form.Item>
-            <Form.Item
-              label="Restaurant ID of the employee"
-              name="restaurantId"
-              style={{ fontSize: "24px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "The restaurantId of the employee is required",
-                },
-              ]}
-            >
-              <Input className="EmployeeInput" placeholder="Enter the restaurantId of the employee" />
             </Form.Item>
             
           </div>

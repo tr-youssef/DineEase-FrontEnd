@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { callAPI } from "../../../utils/FetchData.js"
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { EditFilled, DeleteFilled } from "@ant-design/icons";
-import { Button, Input, Form } from "antd";
+import { EditFilled, CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { Button, Popover } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import AntTable from '../../../components/AntTable/AntTable.jsx';
 import "./Users.css";
@@ -12,6 +12,7 @@ function Users() {
   const navigate = useNavigate();
   const { id } = useParams();
   const token = JSON.parse(localStorage.getItem("user")).token;
+
   const [fields, setFields] = useState([
     {
       name: ["firstName"],
@@ -30,6 +31,10 @@ function Users() {
       value: "",
     },
     {
+      name: ["active"],
+      Value: ""
+    },
+    {
       name: ["password"],
       value: "",
     },
@@ -41,20 +46,48 @@ function Users() {
 
   const [dataSource, setDataSource] = useState([]);
 
-  function deleteEmployee(id) {
-    callAPI(`http://localhost:5001/users/${id}`, "DELETE", {}, token).then((res) => {
-      if (res === "Employee deleted") {
-        const updatedDataSource = dataSource.filter((employee) => employee._id !== id);
-        setDataSource(updatedDataSource);
-      }
-    });
+  const employeeStatus = (id, status, token) => {
+    if (id) {
+      callAPI(`http://localhost:5001/users/status/${id}`, "PATCH", { active: status }, token)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Failed to update employee status")
+          }
+          return response.json()
+        })
+        .then(data => {
+          console.log("Employee status updated:", data)
+          const updatedDataSource = dataSource.map(employee => {
+            if (employee._id === id) {
+              return { ...employee, active: status }
+            } else {
+              return employee
+            }
+          })
+          setDataSource(updatedDataSource)
+        })
+        .catch(error => {
+          console.error(error)
+        });
+    };
+  };
+  
+  function onClick(){
+    console.log('onClick')
   }
+  
+
   
 
   useEffect(() => {
     let fetchData = async () => {
       await callAPI(`http://localhost:5001/users`, "GET", "", token).then((res) => {
-        setDataSource(res);
+        const result=[]
+        res.map((x)=>{
+          x.active?result.push({...x,status:'active',key:x._id}):result.push({...x,status:'inactive',key:x._id})
+        })
+        setDataSource(result);
+        console.log(result)
       });
     };
     fetchData();
@@ -67,18 +100,24 @@ function Users() {
       title: 'First Name',
       dataIndex: 'firstName',
       key:"firstName",
-      width: '20%',
+      width: '15%',
     }, {
       title: 'Last Name',
       dataIndex: 'lastName',
       key:"lastName",
-      width: '20%',
+      width: '15%',
     },
     {
       title: 'Role',
       dataIndex: 'role',
       key:"role",
-      width: '20%',
+      width: '15%',
+    },
+    {
+      title: 'Active',
+      dataIndex: 'status',
+      key:"status",
+      width: '15%',
     },
     {
       title: 'Email',
@@ -89,23 +128,27 @@ function Users() {
       title: 'Action',
       dataIndex: 'action',
       key:"action",
-      width: "20%", 
+      width: "25%", 
       render: (text, record) => (
         <div className='Icons'>
-          <Link to={`editEmployee/${record._id}`}>
-            <EditFilled
-              className="editIcon"
-              onClick={() => editEmployee(record._id)}
-            />
-          </Link>
-          <DeleteFilled 
-            className='deleteIcon'
-            onClick={() => deleteEmployee(record._id)}
-          />
+          <div>
+            <Link to={`editEmployee/${record._id}`}>
+              <EditFilled
+                className="editIcon"
+                onClick={() => editEmployee(record._id)}
+              />
+            </Link>
+          </div>
+          <div>
+            <Popover title="Change employee to inactive">
+              <div onClick={onClick}>
+               {record.active ? <CheckCircleOutlined /> : <CloseCircleOutlined />}
+              </div>
+            </Popover>
+          </div>
         </div>
       ),
     },
-  
   ];
   
   return (

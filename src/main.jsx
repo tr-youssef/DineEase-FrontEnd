@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Manager from "./pages/manager/Manager.jsx";
 import Menu from "./pages/manager/menu/Menu.jsx";
-import Tables from "./pages/manager/tables/Tables.jsx";
+// import Tables from "./pages/manager/tables/Tables.jsx";
 import Users from "./pages/manager/users/Users.jsx";
 import Category from "./pages/manager/menu/category/Category.jsx";
 import Items from "./pages/manager/menu/items/Items.jsx";
@@ -66,14 +66,14 @@ const router = createBrowserRouter([
               </RequireAuth>
             ),
           },
-          {
-            path: "/manager/tables",
-            element: (
-              <RequireAuth isAllowed={"manager"}>
-                <Tables />
-              </RequireAuth>
-            ),
-          },
+          // {
+          //   path: "/manager/tables",
+          //   element: (
+          //     <RequireAuth isAllowed={"manager"}>
+          //       <Tables />
+          //     </RequireAuth>
+          //   ),
+          // },
           {
             path: "/manager/users",
             element: (

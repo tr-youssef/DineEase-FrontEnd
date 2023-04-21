@@ -1,15 +1,11 @@
 .Icons {
-    margin-left: 20px;
-    letter-spacing: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.editIcon {
+.anticon {
     color: #F36805;
-}
-
-.deleteIcon {
-    color: #F36805;
-    margin-left: 20px;
 }
 
 .employee-button {
