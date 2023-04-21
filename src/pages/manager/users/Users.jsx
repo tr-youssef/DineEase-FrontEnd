@@ -39,55 +39,28 @@ function Users() {
     },
   ]);
 
-  function editEmployee(id) {
-    navigate(`manager/users/editEmployee/${id}`);
-    callAPI(`http://localhost:5001/users/${id}`, "GET", {}, token)
-      .then(response => {
-        setFields([
-          {
-            name: ["firstName"],
-            value: response.data.firstName,
-          },
-          {
-            name: ["lastName"],
-            value: response.data.lastName,
-          },
-          {
-            name: ["email"],
-            value: response.data.email,
-          },
-          {
-            name: ["role"],
-            value: response.data.role,
-          },
-          {
-            name: ["password"],
-            value: response.data.role,
-          },
-          {
-            name: ["restaurantId"],
-            value: response.data.restaurantId,
-          },
-        ]);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  const [dataSource, setDataSource] = useState([]);
+
+  function deleteEmployee(id) {
+    callAPI(`http://localhost:5001/users/${id}`, "DELETE", {}, token).then((res) => {
+      if (res === "Employee deleted") {
+        const updatedDataSource = dataSource.filter((employee) => employee._id !== id);
+        setDataSource(updatedDataSource);
+      }
+    });
   }
   
-  
-  
 
-  const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
-      let fetchData = async () => {
-        await callAPI(`http://localhost:5001/users`, "GET", "", token).then((res) => {
-
-          setDataSource(res);
-        });
-      };
-      fetchData();
+    let fetchData = async () => {
+      await callAPI(`http://localhost:5001/users`, "GET", "", token).then((res) => {
+        setDataSource(res);
+      });
+    };
+    fetchData();
   }, []);
+  
+  
 
   const Columns = [
     {
@@ -127,7 +100,7 @@ function Users() {
           </Link>
           <DeleteFilled 
             className='deleteIcon'
-            onClick={(event) => DeleteEmployee(event, record._id)}
+            onClick={() => deleteEmployee(record._id)}
           />
         </div>
       ),
