@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { callAPI } from "../../../utils/FetchData.js"
 import { useNavigate, useParams } from "react-router-dom";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
-import { Button, Input } from "antd";
+import { Button, Input, Form } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import AntTable from '../../../components/AntTable/AntTable.jsx';
 import "./Users.css";
 
-export function Users() {
+function Users() {
   const navigate = useNavigate();
-  const id = useParams();
+  const { id } = useParams();
   const token = JSON.parse(localStorage.getItem("user")).token;
   const [fields, setFields] = useState([
     {
@@ -38,17 +38,46 @@ export function Users() {
       value: "",
     },
   ]);
-  const { TextArea } = Input;
-  const history = useHistory();
-  const handleClick = () => {
-    history.push("/manager/users");
-  };
 
-  // function editEmployee  (event, id) {
-  //   navigate(`/manager/users/addEmployee`);
-  // };
+  function editEmployee(id) {
+    navigate(`manager/users/editEmployee/${id}`);
+    callAPI(`http://localhost:5001/users/${id}`, "GET", {}, token)
+      .then(response => {
+        setFields([
+          {
+            name: ["firstName"],
+            value: response.data.firstName,
+          },
+          {
+            name: ["lastName"],
+            value: response.data.lastName,
+          },
+          {
+            name: ["email"],
+            value: response.data.email,
+          },
+          {
+            name: ["role"],
+            value: response.data.role,
+          },
+          {
+            name: ["password"],
+            value: response.data.role,
+          },
+          {
+            name: ["restaurantId"],
+            value: response.data.restaurantId,
+          },
+        ]);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
   
   
+  
+
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
       let fetchData = async () => {
@@ -59,6 +88,7 @@ export function Users() {
       };
       fetchData();
   }, []);
+
   const Columns = [
     {
       title: 'First Name',
@@ -89,10 +119,12 @@ export function Users() {
       width: "20%", 
       render: (text, record) => (
         <div className='Icons'>
-          <EditFilled 
-            className='editIcon'
-            onClick={(event) => editEmployee(event, record._id)}
-          />
+          <Link to={`editEmployee/${record._id}`}>
+            <EditFilled
+              className="editIcon"
+              onClick={() => editEmployee(record._id)}
+            />
+          </Link>
           <DeleteFilled 
             className='deleteIcon'
             onClick={(event) => DeleteEmployee(event, record._id)}
@@ -113,7 +145,7 @@ export function Users() {
         </Link>
       </div>
       <div className="employeeTable">
-        <AntTable dataSource={dataSource} Columns={Columns}/> 
+        <AntTable dataSource={dataSource} Columns={Columns}/>
       </div>
     </div>
 

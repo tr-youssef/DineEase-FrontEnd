@@ -3,9 +3,9 @@ import { Input, Button, Form } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { callAPI } from "../../../../utils/FetchData.js";
-import "./Employee.css";
+import "./AddForm.css";
 
-function Employee () {
+export function AddForm () {
   const navigate = useNavigate();
   const id = useParams();
   const token = JSON.parse(localStorage.getItem("user")).token;
@@ -54,14 +54,18 @@ function Employee () {
       confirmPassword: values.confirmPassword,
       restaurantId: values.restaurantId,
     };
-  
+
     if (Object.keys(id).length === 0) {
       callAPI("http://localhost:5001/users/signup", "POST", data, token).then(() => {
         navigate("/manager/users");
       });
+    } else {
+      callAPI(`http://localhost:5001/users/${id}`, "PATCH", data, token).then(() => {
+        navigate("/manager/users");
+      });
     }
   };
-  
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -69,7 +73,7 @@ function Employee () {
     <div className="Employee">
       <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
       <div className="EmployeeForm">
-        <Form name="addEmployee" fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+        <Form name="addEmployee"  fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
           <div className="EmployeeInputLine">
             <Form.Item
               label="First name of the employee"
@@ -173,4 +177,4 @@ function Employee () {
   );
 }
 
-export default Employee;
+export default AddForm;

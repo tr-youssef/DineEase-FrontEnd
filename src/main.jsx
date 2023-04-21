@@ -5,7 +5,6 @@ import App from "./App";
 import Manager from "./pages/manager/Manager.jsx";
 import Menu from "./pages/manager/menu/Menu.jsx";
 import Tables from "./pages/manager/tables/Tables.jsx";
-import Employee from "./pages/manager/users/Employee/Employee.jsx";
 import Users from "./pages/manager/users/Users.jsx";
 import Category from "./pages/manager/menu/category/Category.jsx";
 import Items from "./pages/manager/menu/items/Items.jsx";
@@ -13,6 +12,9 @@ import TakeOrder from "./pages/server/TakeOrder/TakeOrder.jsx";
 import SignIn from "./pages/login/SignIn.jsx";
 import Server from "./pages/server/Server.jsx";
 import RequireAuth from "./utils/RequireAuth.jsx";
+import AddForm from "./pages/manager/users/AddForm/AddForm.jsx"
+import EditForm from "./pages/manager/users/EditForm/EditForm.jsx"
+
 
 const router = createBrowserRouter([
   { path: "/signin", element: <SignIn /> },
@@ -84,7 +86,15 @@ const router = createBrowserRouter([
             path: "/manager/users/addEmployee",
             element: (
               <RequireAuth isAllowed={"manager"}>
-                <Employee />
+                <AddForm />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/users/editEmployee/:id",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <EditForm />
               </RequireAuth>
             ),
           },

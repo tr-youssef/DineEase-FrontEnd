@@ -4,8 +4,6 @@ import "./AntTable.css";
 
 
 function AntTable({dataSource,Columns}) {
-    // console.log('dataSource', dataSource)
-    // console.log('Columns', Columns)
   return (
     <div className='antTable'><Table dataSource={dataSource} columns={Columns} /></div>
   )
