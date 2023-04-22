@@ -1,13 +1,7 @@
-.AddEmployeeForm {
-  margin-top: auto;
+.Employee {
+  margin-top: 72px !important;
   top: 50%;
   left: 50%;
-}
-
-.form-row {
-  display: flex; 
-  flex-wrap: wrap; 
-  margin-bottom: 20px; 
 }
 
 .form-group {
