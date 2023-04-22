@@ -1,15 +1,18 @@
 .Icons {
-    margin-left: 20px;
-    letter-spacing: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.editIcon {
+.anticon-edit {
     color: #F36805;
 }
 
-.deleteIcon {
-    color: #F36805;
-    margin-left: 20px;
+.anticon-check-circle {
+    color: green;
+}
+.anticon-close-circle {
+    color: red;
 }
 
 .employee-button {
@@ -17,7 +20,16 @@
     color: #FFFFFF;
     font-size: 16px;
     margin-top: 60px;
-    left: 75.5%;
-    position: absolute;
+}
 
+.employeeButton {
+    float: right;
+    margin-top: -4vh;
+}
+
+.employess {
+    padding-top: 38px;
+    padding-left: 107px;
+    margin-top: 72px;
+    margin-left: 50px;
 }
