@@ -4,8 +4,15 @@
     justify-content: space-between;
 }
 
-.anticon {
+.anticon-edit {
     color: #F36805;
+}
+
+.anticon-check-circle {
+    color: green;
+}
+.anticon-close-circle {
+    color: red;
 }
 
 .employee-button {

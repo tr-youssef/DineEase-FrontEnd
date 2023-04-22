@@ -46,39 +46,30 @@ function Users() {
 
   const [dataSource, setDataSource] = useState([]);
 
-  const employeeStatus = (id, status, token) => {
+  const employeeStatus = (id, token, status) => {
+    console.log('status', status)
     if (id) {
       callAPI(`http://localhost:5001/users/status/${id}`, "PATCH", { active: status }, token)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Failed to update employee status")
-          }
-          return response.json()
-        })
         .then(data => {
-          console.log("Employee status updated:", data)
+          console.log('data', data)
+          console.log("Employee status updated:", data);
           const updatedDataSource = dataSource.map(employee => {
             if (employee._id === id) {
-              return { ...employee, active: status }
+              return { ...employee, active: status };
             } else {
-              return employee
+              return employee;
             }
-          })
-          setDataSource(updatedDataSource)
+          });
+          setDataSource(updatedDataSource);
         })
         .catch(error => {
-          console.error(error)
+          console.error("Failed to update employee status:", error);
         });
-    };
+    }
   };
   
-  function onClick(){
-    console.log('onClick')
-  }
-  
 
   
-
   useEffect(() => {
     let fetchData = async () => {
       await callAPI(`http://localhost:5001/users`, "GET", "", token).then((res) => {
@@ -91,7 +82,7 @@ function Users() {
       });
     };
     fetchData();
-  }, []);
+  }, [dataSource]);
   
   
 
@@ -140,9 +131,9 @@ function Users() {
             </Link>
           </div>
           <div>
-            <Popover title="Change employee to inactive">
-              <div onClick={onClick}>
-               {record.active ? <CheckCircleOutlined /> : <CloseCircleOutlined />}
+            <Popover title={record.active ? "Change employee to inactive " : "Change employee to active"}>
+              <div onClick={() => employeeStatus(record._id, token, record.active)}>
+                {record.active ? <CheckCircleOutlined /> : <CloseCircleOutlined />}
               </div>
             </Popover>
           </div>
