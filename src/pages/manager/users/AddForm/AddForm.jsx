@@ -26,14 +26,6 @@ export function AddForm () {
       name: ["role"],
       value: "",
     },
-    {
-      name: ["password"],
-      value: "",
-    },
-    {
-      name: ["confirmPassword"],
-      value: "",
-    },
   ]);
 
   const handleClick = () => {
@@ -130,7 +122,7 @@ export function AddForm () {
                 size="middle"
               >
                 <Option value="manager">Manager</Option>
-                <Option value="chef">Shef</Option>
+                <Option value="chef">Chef</Option>
                 <Option value="server">Server</Option>
                 <Option value="receptionist">Receptionist</Option>
               </Select>

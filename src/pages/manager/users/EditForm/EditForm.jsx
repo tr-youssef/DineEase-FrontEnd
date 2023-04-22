@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Form } from "antd";
+import { Input, Button, Form, Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { callAPI } from "../../../../utils/FetchData.js";
@@ -33,14 +33,6 @@ const { id } = useParams();
               name: ["role"],
               value: response.role,
             },
-            {
-              name: ["password"],
-              value: response.password,
-            },
-            {
-              name: ["restaurantId"],
-              value: response.restaurantId,
-            },
           ]);
         })
         .catch((error) => console.log(error));
@@ -62,19 +54,12 @@ const { id } = useParams();
           name: ["role"],
           value: "",
         },
-        {
-          name: ["password"],
-          value: "",
-        },
-        {
-          name: ["restaurantId"],
-          value: "",
-        },
       ]);
     }
   }, [id]);
 
   const onFinish = (values) => {
+    console.log('onFinish', onFinish)
     if (id) {
       callAPI(`http://localhost:5001/users/${id}`, "PATCH", values, token)
         .then((response) => {
@@ -93,6 +78,8 @@ const { id } = useParams();
   };
 
 
+  const { Option } = Select;
+
   return (
     <div className="Employee">
       <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
@@ -110,7 +97,7 @@ const { id } = useParams();
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the first name of the employee" />
+              <Input className="EmployeeInput" placeholder="Enter the first name of the employee" size="middle" />
             </Form.Item>
             <Form.Item
               label="Last name of the employee"
@@ -123,7 +110,7 @@ const { id } = useParams();
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the last name of the employee" />
+              <Input className="EmployeeInput" placeholder="Enter the last name of the employee" size="middle" />
             </Form.Item>
             <Form.Item
               label="Email of the employee"
@@ -136,7 +123,7 @@ const { id } = useParams();
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the email of the employee" />
+              <Input className="EmployeeInput" placeholder="Enter the email of the employee" size="middle" />
             </Form.Item>
             <Form.Item
               label="Role of the employee"
@@ -149,41 +136,21 @@ const { id } = useParams();
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the role of the employee" />
+              <Select
+                className="EmployeeInput"
+                placeholder="Select the role of the employee"
+                size="middle"
+              >
+                <Option value="manager">Manager</Option>
+                <Option value="chef">Chef</Option>
+                <Option value="server">Server</Option>
+                <Option value="receptionist">Receptionist</Option>
+              </Select>
             </Form.Item>
-            <Form.Item
-              label="Password of the employee"
-              name="password"
-              style={{ fontSize: "24px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "The password of the employee is required",
-                },
-              ]}
-            >
-              <Input className="EmployeeInput" placeholder="Enter the password of the employee" />
-            </Form.Item>
-            <Form.Item
-              label="Restaurant ID of the employee"
-              name="restaurantId"
-              style={{ fontSize: "24px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "The restaurantId of the employee is required",
-                },
-              ]}
-            >
-              <Input className="EmployeeInput" placeholder="Enter the restaurantId of the employee" />
-            </Form.Item>
-            
           </div>
           <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
             Save Changes
           </Button>
-
-
         </Form>
       </div>
     </div>
