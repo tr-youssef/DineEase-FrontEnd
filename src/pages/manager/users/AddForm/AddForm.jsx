@@ -65,15 +65,18 @@ export function AddForm () {
     console.log("Failed:", errorInfo);
   };
   return (
-    <div className="Employee">
-      <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
-      <div className="EmployeeForm">
-        <Form name="addEmployee"  fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
-          <div className="EmployeeInputLine">
+    <div className="AddEmployeeForm">
+      <Form
+        name="addEmployee"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <div className="row">
+          <div className="column">
             <Form.Item
               label="First name of the employee"
               name="firstName"
-              style={{ fontSize: "24px" }}
               rules={[
                 {
                   required: true,
@@ -81,12 +84,13 @@ export function AddForm () {
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the first name of the employee" />
+              <Input placeholder="Enter the first name of the employee" />
             </Form.Item>
+          </div>
+          <div className="column">
             <Form.Item
               label="Last name of the employee"
               name="lastName"
-              style={{ fontSize: "24px" }}
               rules={[
                 {
                   required: true,
@@ -94,12 +98,15 @@ export function AddForm () {
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the last name of the employee" />
+              <Input placeholder="Enter the last name of the employee" />
             </Form.Item>
+          </div>
+        </div>
+        <div className="row">
+          <div className="column">
             <Form.Item
               label="Email of the employee"
               name="email"
-              style={{ fontSize: "24px" }}
               rules={[
                 {
                   required: true,
@@ -107,12 +114,13 @@ export function AddForm () {
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the email of the employee" />
+              <Input placeholder="Enter the email of the employee" />
             </Form.Item>
+          </div>
+          <div className="column">
             <Form.Item
               label="Role of the employee"
               name="role"
-              style={{ fontSize: "24px" }}
               rules={[
                 {
                   required: true,
@@ -120,12 +128,15 @@ export function AddForm () {
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the role of the employee" />
+              <Input placeholder="Enter the role of the employee" />
             </Form.Item>
+          </div>
+        </div>
+        <div className="row">
+          <div className="column">
             <Form.Item
               label="Password of the employee"
               name="password"
-              style={{ fontSize: "24px" }}
               rules={[
                 {
                   required: true,
@@ -133,12 +144,13 @@ export function AddForm () {
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the password of the employee" />
+              <Input placeholder="Enter the password of the employee" />
             </Form.Item>
+          </div>
+          <div className="column">
             <Form.Item
               label="Confirm the password of the employee"
               name="confirmPassword"
-              style={{ fontSize: "24px" }}
               rules={[
                 {
                   required: true,
@@ -146,17 +158,17 @@ export function AddForm () {
                 },
               ]}
             >
-              <Input className="EmployeeInput" placeholder="Re-enter the password of the employee" />
+              <Input placeholder="Re-enter the password of the employee" />
             </Form.Item>
-            
           </div>
-          <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
-            {Object.keys(id).length === 0 ? "Create Employee" : "Save change"}
-          </Button>
-        </Form>
-      </div>
+        </div>
+        <Button className="formButton" htmlType="submit">
+          {Object.keys(id).length === 0 ? "Create Employee" : "Save change"}
+        </Button>
+      </Form>
     </div>
   );
-}
+};
+
 
 export default AddForm;

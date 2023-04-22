@@ -1,26 +1,25 @@
-.Employee {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-left: 200px;
-    margin-right: 200px;
-    margin-bottom: 200px;
-    padding-top: 38px;
-  }
-  .EmployeeInput {
-    display: flex;
-    flex-direction: column;
-  }
-  .EmployeeForm {
-    width: 800px;
-  }
-  .ItemButton {
-    margin: 20px;
-  }
-  
-  .ItemsInputLine {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
+.AddEmployeeForm {
+  margin-top: auto;
+  top: 50%;
+  left: 50%;
+}
+
+.form-row {
+  display: flex; 
+  flex-wrap: wrap; 
+  margin-bottom: 20px; 
+}
+
+.form-group {
+  flex-basis: 50%; 
+  padding-right: 10px; 
+  box-sizing: border-box; 
+}
+
+.formButton {
+  background: rgb(243, 104, 5);
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  float: right;
+  margin-top: 10px;
+}
