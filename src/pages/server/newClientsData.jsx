@@ -1,15 +1,16 @@
 import React from 'react'; 
 import { Space, Table, Tag } from 'antd';
 import ordericonimage from '../../assets/OrderIcon.png';
+import AntTable from "../../components/AntTable/AntTable.jsx";
 
 
-const columns = [
+const Columns = [
   
   {
     title: 'Table Number',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <a>{text}</a>,
+    
   },
   {
     title: 'Seats',
@@ -19,8 +20,9 @@ const columns = [
    
   {
     title: 'Order',
+    dataIndex: 'action',
     key: 'action',
-    key: 'action'
+    render: () => <img src={ordericonimage} alt="Order" />
   },
 ];
 const data = [
@@ -29,7 +31,6 @@ const data = [
     key: '1',
     name: 'Table 1',
     seats: 2,
-   
   },
   {
     key: '2',
@@ -46,7 +47,8 @@ const data = [
 const NewClientData = () => {
 
   return (
-    <Table columns={columns} dataSource={data} />
+    // <AntTable Columns={Columns} />
+    <AntTable dataSource={data} Columns={Columns}/>
   )
 }
 export default NewClientData;

@@ -1,12 +1,14 @@
 import React from 'react'; 
 import { Space, Table, Tag } from 'antd';
+import ordericonimage from '../../assets/OrderIcon.png';
+import billiconimage from '../../assets/BillIcon.png';
+import AntTable from "../../components/AntTable/AntTable.jsx";
 
 const columns = [
   {
     title: 'Table Number',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <a>{text}</a>,
   },
   {
     title: 'Seats',
@@ -16,21 +18,15 @@ const columns = [
    
   {
     title: 'Order',
+    dataIndex : 'action',
     key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-      </Space>
-    ),
+    render: () => <img src={ordericonimage} alt="Order" />
     },
   {
     title: 'Bill',
+    dataIndex: 'action',
     key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-      </Space>
-    ),
+    
   },
 ];
 const data = [
@@ -38,23 +34,23 @@ const data = [
     key: '1',
     name: 'Table 1',
     seats: 2,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    
+  
   },
   {
     key: '2',
     name: 'Table 2',
     seats: 6,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    
+   
   },
   {
     key: '3',
     name: 'Table 3',
     seats: 10,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
+    
+    
   },
 ];
-const AlreadyOrderedData = () => <Table columns={columns} dataSource={data} />;
+const AlreadyOrderedData = () =><AntTable Columns={columns} dataSource={data} />;
 export default AlreadyOrderedData;

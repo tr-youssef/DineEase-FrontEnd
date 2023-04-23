@@ -9,6 +9,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const onFinish = async (values) => {
     const user = await callAPI("http://localhost:5001/users/signin", "POST", values);
+    console.log(user)
     if (user) {
       window.localStorage.setItem("user", JSON.stringify(user));
       navigate(`/${user.role}`);

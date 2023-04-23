@@ -4,7 +4,8 @@ import SignIn from "../login/SignIn.jsx";
 import NewClientData from "./newClientsData.jsx";
 import AlreadyOrderedData from "./alreadyOrderedData.jsx";
 
-const server = () => <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
+const Server = () => <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
+                    
 
 const onChange = (key) => {
   console.log(key);
@@ -22,4 +23,4 @@ const items = [
   },
 ];
 
-export default server;
+export default Server;
