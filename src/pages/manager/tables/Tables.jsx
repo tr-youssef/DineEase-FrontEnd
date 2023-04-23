@@ -15,7 +15,7 @@ function Tables() {
 
   const [fields, setFields] = useState([
     {
-      name: ["Table"],
+      name: ["nameOfTable"],
       value: "",
     },
     {
@@ -23,25 +23,27 @@ function Tables() {
       value: "",
     },
     {
-      name: ["server"],
+      name: ["userId"],
       value: "",
-    }
+    },
+    {
+        name: ["restaurantId"],
+        value: "",
+    },
   ]);
 
   const [dataSource, setDataSource] = useState([]);
 
   function DeleteTable(event, id) {
     event.stopPropagation();
-    callAPI(`http://localhost:5001/table/${id}`, "DELETE", {}, token).then((res) => {
+    callAPI(`http://localhost:5001/tables/${id}`, "DELETE", {}, token).then((res) => {
       if (res === "Table deleted") setTables(tables.filter((table) => table._id !== id));
     });
   }
   
-
-  
   useEffect(() => {
     let fetchData = async () => {
-      await callAPI(`http://localhost:5001/users`, "GET", "", token).then((res) => {
+      await callAPI(`http://localhost:5001/tables`, "GET", "", token).then((res) => {
         const result=[]
         res.map((x)=>{
           x.active?result.push({...x,status:'active',key:x._id}):result.push({...x,status:'inactive',key:x._id})
@@ -58,18 +60,18 @@ function Tables() {
   const Columns = [
     {
       title: 'Table No.',
-      dataIndex: 'NameOfTable',
-      key:"firstName",
+      dataIndex: 'nameOfTable',
+      key:"nameOfTable",
       width: '30%',
     }, {
       title: 'Seats',
       dataIndex: 'capacity',
-      key:"lastName",
+      key:"capacity",
       width: '30%',
     },
     {
       title: 'Server',
-      dataIndex: 'server',
+      dataIndex: 'userId',
       key:"role",
       width: '30%',
     },
@@ -101,15 +103,15 @@ function Tables() {
   ];
   
   return (
-    <div className="employees">
-      <div className="employeeButton">
-        <Link to={"addEmployee"}>
-            <Button className='employee-button' icon={<PlusCircleOutlined />} size={"large"}> 
+    <div className="tables">
+      <div className="tableButton">
+        <Link to={"addTable"}>
+            <Button className='table-button' icon={<PlusCircleOutlined />} size={"large"}> 
               New Table
             </Button>
         </Link>
       </div>
-      <div className="employeeTable">
+      <div className="serverTable">
         <AntTable dataSource={dataSource} Columns={Columns}/>
       </div>
     </div>

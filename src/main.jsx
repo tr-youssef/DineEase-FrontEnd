@@ -13,6 +13,7 @@ import SignIn from "./pages/login/SignIn.jsx";
 import Server from "./pages/server/Server.jsx";
 import RequireAuth from "./utils/RequireAuth.jsx";
 import AddForm from "./pages/manager/users/AddForm/AddForm.jsx"
+import AddTable from "./pages/manager/tables/AddTable/AddTable.jsx";
 import EditForm from "./pages/manager/users/EditForm/EditForm.jsx"
 
 
@@ -49,6 +50,14 @@ const router = createBrowserRouter([
           {
             path: "/manager/tables",
             element: <RequireAuth children={<Tables />} isAllowed={"manager"} />,
+          },
+          {
+            path: "/manager/tables/addTable",
+            element: (
+            <RequireAuth isAllowed={"manager"} >
+              <AddTable />
+            </RequireAuth>
+            ),
           },
           {
             path: "/manager/users",

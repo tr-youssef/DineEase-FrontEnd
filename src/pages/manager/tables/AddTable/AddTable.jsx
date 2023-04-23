@@ -1,138 +1,138 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Form, Select } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Input, Button, Form, Select } from "antd";
+import { useNavigate } from "react-router-dom";
 import { callAPI } from "../../../../utils/FetchData.js";
-import "./AddForm.css";
+import "./AddTable.css";
 
-export function AddTable () {
+const { Option } = Select;
+export function TableForm () {
   const navigate = useNavigate();
-  const id = useParams();
   const token = JSON.parse(localStorage.getItem("user")).token;
-  const [fields, setFields] = useState([
-    {
-      name: ["Table"],
-      value: "",
-    },
-    {
-      name: ["Seats"],
-      value: "",
-    },
-    {
-      name: ["server"],
-      value: "",
-    },
-  ]);
+  const [servers, setServers] = useState([]);
+  
+  useEffect(() => {
+    callAPI("http://localhost:5001/users?role=server", "GET", null, token)
+      .then((data) => {
+        setServers(data);
+        console.log('data', data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
+//   .then(data => {
+//     console.log('data', data)
+//     console.log("Employee status updated:", data);
+//     const updatedDataSource = dataSource.map(employee => {
+//       if (employee._id === id) {
+//         return { ...employee, active: status };
+//       } else {
+//         return employee;
+//       }
+//     });
+//     setDataSource(updatedDataSource);
+  
+  
+  
   const handleClick = () => {
-    navigate("/manager/users");
+    navigate("/manager/tables");
   };
+
+  const fields = [
+    {
+      name: "nameOfTable",
+      value: "",
+    },
+    {
+      name: "capacity",
+      value: "",
+    },
+    {
+      name: "server",
+      value: undefined,
+    },
+  ];
 
   const onFinish = (values) => {
     const data = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      role: values.role,
-      password: values.role.toLowerCase(), 
-      confirmPassword: values.confirmPassword,
+      nameOfTable: values.nameOfTable,
+      capacity: values.capacity,
+      server: values.server,
     };
   
-    if (Object.keys(id).length === 0) {
-      callAPI("http://localhost:5001/users/signup", "POST", data, token).then(() => {
-        navigate("/manager/users");
-      });
-    } else {
-      callAPI(`http://localhost:5001/users/${id}`, "PATCH", data, token).then(() => {
-        navigate("/manager/users");
-      });
-    }
+    callAPI("http://localhost:5001/tables/", "POST", data, token).then(() => {
+      navigate("/manager/tables");
+    });
   };
   
-
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
-  const { Option } = Select;
-
   return (
-    <div className="Employee">
-      <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
-      <div className="EmployeeForm">
+
+      <div className="AddTable">
+        <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
         <Form name="addEmployee"  fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
-          <div className="EmployeeInputLine">
+            
+          <Form.Item
+            label="Name of table"
+            name="nameOfTable"
+            rules={[
+              {
+                required: true,
+                message: "Please input the name of the table",
+              },
+            ]}
+          >
+            <Input placeholder="Enter the name of the table" />
+          </Form.Item>
+          <Form.Item
+            label="No. of seats"
+            name="capacity"
+            rules={[
+              {
+                required: true,
+                message: "Please input the number of seats",
+              },
+              {
+                type: "number",
+                min: 1,
+                message: "Number of seats must be greater than 0",
+              },
+            ]}
+          >
+            <Input placeholder="Enter the number of seats" type="number" />
+          </Form.Item>
             <Form.Item
-              label="First name of the employee"
-              name="firstName"
-              style={{ fontSize: "24px" }}
-              rules={[
+            label="Server"
+            name="server"
+            rules={[
                 {
-                  required: true,
-                  message: "The first name of the employee is required",
+                required: true,
+                message: "Please select a server",
                 },
-              ]}
+            ]}
             >
-              <Input className="EmployeeInput" placeholder="Enter the first name of the employee" size="middle" />
+            <Select>
+            <Option value="">Select a server</Option>
+            {servers && servers.map((server) => (
+                <Option key={server._id} value={server._id}>
+                {server.firstName}
+                </Option>
+            ))}
+            </Select>
             </Form.Item>
-            <Form.Item
-              label="Last name of the employee"
-              name="lastName"
-              style={{ fontSize: "24px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "The last name of the employee is required",
-                },
-              ]}
-            >
-              <Input className="EmployeeInput" placeholder="Enter the last name of the employee" size="middle" />
-            </Form.Item>
-            <Form.Item
-              label="Email of the employee"
-              name="email"
-              style={{ fontSize: "24px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "The email of the employee is required",
-                },
-              ]}
-            >
-              <Input className="EmployeeInput" placeholder="Enter the email of the employee" size="middle" />
-            </Form.Item>
-            <Form.Item
-              label="Role of the employee"
-              name="role"
-              style={{ fontSize: "24px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "The role of the employee is required",
-                },
-              ]}
-            >
-              <Select
-                className="EmployeeInput"
-                placeholder="Select the role of the employee"
-                size="middle"
-              >
-                <Option value="manager">Manager</Option>
-                <Option value="chef">Chef</Option>
-                <Option value="server">Server</Option>
-                <Option value="receptionist">Receptionist</Option>
-              </Select>
-            </Form.Item>
-          </div>
-          <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
-            Add Employee
-          </Button>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Add Table
+            </Button>
+          </Form.Item>
         </Form>
       </div>
-    </div>
   );
 }
 
-
-
-export default AddTable;
+export default TableForm;
