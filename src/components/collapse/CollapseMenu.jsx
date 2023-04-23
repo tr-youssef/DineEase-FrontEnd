@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Collapse } from "antd";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
-import { callAPI } from "../../utils/FetchData.js";
+import { callAPI } from "../../utils/FetchData.jsx";
 import ItemCard from "../itemCard/ItemCard.jsx";
 import "./CollapseMenu.css";
 
 function CollapseMenu({ booked, order, setOrder }) {
   const navigate = useNavigate();
-  const token = JSON.parse(localStorage.getItem("user")).token;
+  const token = JSON.parse(localStorage.getItem("user"))?.token;
   const [categories, setCategories] = useState("");
   const [items, setItems] = useState([]);
   const { Panel } = Collapse;

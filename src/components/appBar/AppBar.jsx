@@ -7,8 +7,8 @@ import Profil from "../profil/profil.jsx";
 function AppBar() {
   let auth = JSON.parse(localStorage.getItem("user"));
   const avatar = "https://i.pravatar.cc/100";
-  const name = auth.firstName + " " + auth.lastName;
-  const role = auth.role;
+  const name = auth?.firstName + " " + auth?.lastName;
+  const role = auth?.role;
 
   return (
     <div className="AppBar">

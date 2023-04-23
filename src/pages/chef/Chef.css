@@ -1,0 +1,28 @@
+.ChefRow {
+  width: 100vw;
+  height: 46vh;
+}
+.ChefRow:hover {
+  cursor: pointer;
+}
+.ChefCol {
+  width: 125vw;
+  height: 46vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: #000000;
+  background-color: #f36805;
+  color: #ffffff;
+}
+.ChefTable {
+  margin-bottom: 20px;
+}
+.ChefLineItem {
+  display: flex;
+  width: 20vw;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

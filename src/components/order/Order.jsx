@@ -3,7 +3,7 @@ import { Button } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
 import LineOrder from "./lineOrder/LineOrder.jsx";
 import TotalPrice from "../totalPrice/TotalPrice.jsx";
-import { callAPI } from "../../utils/FetchData.js";
+import { callAPI } from "../../utils/FetchData.jsx";
 import "./Order.css";
 
 function Order({ booked, order, setOrder }) {
@@ -21,14 +21,14 @@ function Order({ booked, order, setOrder }) {
   function takeOrder() {
     const data = {
       bookedId: booked,
-      userId: user.userId,
+      userId: user?.userId,
       items: order,
       subTotalAmount: item,
       tax: Math.round((item * 0.05 + Number.EPSILON) * 100) / 100,
       totalAmount: Math.round((item + item * 0.05 + Number.EPSILON) * 100) / 100,
       status: "New",
     };
-    callAPI("http://localhost:5001/orders", "POST", data, user.token).then(() => {
+    callAPI("http://localhost:5001/orders", "POST", data, user?.token).then(() => {
       navigate("/server");
     });
   }

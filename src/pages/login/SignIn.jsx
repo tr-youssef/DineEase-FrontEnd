@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
-import { callAPI } from "../../utils/FetchData";
+import { callAPI } from "../../utils/FetchData.jsx";
 import loginImage from "../../assets/WebsiteImage.png";
 import logoImage from "../../assets/Logo1.png";
 
