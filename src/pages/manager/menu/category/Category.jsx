@@ -8,7 +8,7 @@ import "./Category.css";
 function Category() {
   const navigate = useNavigate();
   const id = useParams();
-  const token = localStorage.getItem("user").token;
+  const token = JSON.parse(localStorage.getItem("user")).token;
   const [fields, setFields] = useState([
     {
       name: ["name"],
