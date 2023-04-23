@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Input, Button, Form, Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { callAPI } from "../../../../utils/FetchData.js";
 import "./AddTable.css";
 
-const { Option } = Select;
 export function TableForm () {
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("user")).token;
   const [servers, setServers] = useState([]);
+  const [selectedServerId, setSelectedServerId] = useState("");
+
   
   useEffect(() => {
     callAPI("http://localhost:5001/users?role=server", "GET", null, token)
@@ -41,13 +42,15 @@ export function TableForm () {
     },
   ];
 
+
 const onFinish = (values) => {
   const data = {
     nameOfTable: values.nameOfTable,
     capacity: values.capacity,
-    userId: values.user,
+    userId: values.selectedServerId,
     status: "available",
-  };  
+  }; 
+  console.log('data', data) 
     callAPI("http://localhost:5001/tables/", "POST", data, token).then(() => {
       navigate("/manager/tables");
     });
@@ -57,7 +60,13 @@ const onFinish = (values) => {
     console.log("Failed:", errorInfo);
   };
 
+  const { Option } = Select;
   
+  const handleServerSelect = (value) => {
+    setSelectedServerId(value);
+    console.log("Selected server ID:", value);
+  };
+
 
   return (
 
@@ -91,7 +100,7 @@ const onFinish = (values) => {
           </Form.Item>
             <Form.Item
             label="Server"
-            name="server"
+            name="selectedServerId"
             rules={[
                 {
                 required: true,
@@ -99,13 +108,14 @@ const onFinish = (values) => {
                 },
             ]}
             >
-            <Select>
-            <Option value="">Select a server</Option>
-            {servers && servers.map((server) => (
-                <Option key={server._id} value={server._id}>
-                {server.firstName}
-                </Option>
-            ))}
+            <Select onChange={handleServerSelect} value={selectedServerId} key={selectedServerId}>
+              <Option value="">Select a server</Option>
+              {servers &&
+                servers.map((server) => (
+                  <Option key={server._id} value={server._id}>
+                    {server.firstName}
+                  </Option>
+                ))}
             </Select>
             </Form.Item>
           <Form.Item>
