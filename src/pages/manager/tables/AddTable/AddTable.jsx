@@ -61,7 +61,7 @@ const onFinish = (values) => {
   };
 
   const { Option } = Select;
-  
+
   const handleServerSelect = (value) => {
     setSelectedServerId(value);
     console.log("Selected server ID:", value);
@@ -71,7 +71,7 @@ const onFinish = (values) => {
   return (
 
       <div className="AddTable">
-        <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
+        <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "left", width: "100px" }} size={"large"} />
         <Form name="addEmployee"  fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
             
           <Form.Item
@@ -119,9 +119,9 @@ const onFinish = (values) => {
             </Select>
             </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Add Table
-            </Button>
+          <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
+            Add Table
+          </Button>
           </Form.Item>
         </Form>
       </div>
