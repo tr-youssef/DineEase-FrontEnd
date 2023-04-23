@@ -59,7 +59,6 @@ const { id } = useParams();
   }, [id]);
 
   const onFinish = (values) => {
-    console.log('onFinish', onFinish)
     if (id) {
       callAPI(`http://localhost:5001/users/${id}`, "PATCH", values, token)
         .then((response) => {

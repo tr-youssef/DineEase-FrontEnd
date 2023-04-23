@@ -21,20 +21,6 @@ export function TableForm () {
         console.log(error);
       });
   }, []);
-
-//   .then(data => {
-//     console.log('data', data)
-//     console.log("Employee status updated:", data);
-//     const updatedDataSource = dataSource.map(employee => {
-//       if (employee._id === id) {
-//         return { ...employee, active: status };
-//       } else {
-//         return employee;
-//       }
-//     });
-//     setDataSource(updatedDataSource);
-  
-  
   
   const handleClick = () => {
     navigate("/manager/tables");
@@ -50,18 +36,18 @@ export function TableForm () {
       value: "",
     },
     {
-      name: "server",
-      value: undefined,
+      name: "status",
+      value: "",
     },
   ];
 
-  const onFinish = (values) => {
-    const data = {
-      nameOfTable: values.nameOfTable,
-      capacity: values.capacity,
-      server: values.server,
-    };
-  
+const onFinish = (values) => {
+  const data = {
+    nameOfTable: values.nameOfTable,
+    capacity: values.capacity,
+    userId: values.user,
+    status: "available",
+  };  
     callAPI("http://localhost:5001/tables/", "POST", data, token).then(() => {
       navigate("/manager/tables");
     });
@@ -70,6 +56,8 @@ export function TableForm () {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  
 
   return (
 
@@ -97,14 +85,9 @@ export function TableForm () {
                 required: true,
                 message: "Please input the number of seats",
               },
-              {
-                type: "number",
-                min: 1,
-                message: "Number of seats must be greater than 0",
-              },
             ]}
           >
-            <Input placeholder="Enter the number of seats" type="number" />
+            <Input placeholder="Enter the number of seats" />
           </Form.Item>
             <Form.Item
             label="Server"
