@@ -6,6 +6,9 @@
   border-radius: 20px;
   margin-left: 20px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .Title {
   margin-top: 32px;

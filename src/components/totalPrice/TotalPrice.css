@@ -1,0 +1,12 @@
+.TotalPrice {
+  color: #ffffff;
+  margin: 0 33px;
+}
+.Line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.HR {
+  margin-bottom: 15px;
+}
