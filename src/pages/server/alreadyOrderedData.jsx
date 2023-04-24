@@ -1,56 +1,57 @@
-import React from 'react'; 
+import {  useEffect,  useState } from 'react';
 import { Space, Table, Tag } from 'antd';
 import ordericonimage from '../../assets/OrderIcon.png';
 import billiconimage from '../../assets/BillIcon.png';
 import AntTable from "../../components/AntTable/AntTable.jsx";
+import { callAPI } from "../../utils/FetchData";
+import { Link } from 'react-router-dom';
 
-const columns = [
-  {
-    title: 'Table Number',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Seats',
-    dataIndex: 'seats',
-    key: 'seats',
-  },
-   
-  {
-    title: 'Order',
-    dataIndex : 'action',
-    key: 'action',
-    render: () => <img src={ordericonimage} alt="Order" />
+
+const AlreadyOrderedData = () => {
+  const Columns = [
+    {
+      title: 'Table Number',
+      dataIndex: 'nameOfTable',
+      key: 'nameOfTable',
+      
     },
-  {
-    title: 'Bill',
-    dataIndex: 'action',
-    key: 'action',
-    
-  },
-];
-const data = [
-  {
-    key: '1',
-    name: 'Table 1',
-    seats: 2,
-    
+    {
+      title: 'Seats',
+      dataIndex: 'capacity',
+      key: 'capacity',
+    },
+    {
+      title: 'Order',
+      dataIndex: 'bookingId',
+      key: 'bookingId',
+      render: (bookingId) => <Link to={"/server/takeOrder/"+ bookingId}><img src={ordericonimage}  alt="Take Order" /></Link>
+    },
+    {
+      title: 'Bill',
+      dataIndex: 'bookingId',
+      key: 'bookingId',
+      render: (bookingId) => <Link to={"/server/takeOrder/" + bookingId}><img src={ordericonimage} alt="Take Order" /></Link>
+    }
+  ];
+  const token = JSON.parse(localStorage.getItem("user")).token;
   
-  },
-  {
-    key: '2',
-    name: 'Table 2',
-    seats: 6,
-    
-   
-  },
-  {
-    key: '3',
-    name: 'Table 3',
-    seats: 10,
-    
-    
-  },
-];
-const AlreadyOrderedData = () =><AntTable Columns={columns} dataSource={data} />;
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    let fetchData = async () => {
+        // TODO: Update with correct server id
+      console.log(token)
+        await callAPI(`http://localhost:5001/tables/availableTables/123`, "GET", "", token).then((res) => {
+        setData(res);
+        });
+      };
+      fetchData();
+  }, []);
+  
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-50px' }}>
+      <AntTable dataSource={data} Columns={Columns}/>
+    </div>
+  );
+};
+
 export default AlreadyOrderedData;
