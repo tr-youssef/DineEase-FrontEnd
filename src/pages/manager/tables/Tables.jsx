@@ -10,8 +10,7 @@ import "./Tables.css";
 import { EditTable } from './EditTable/EditTable.jsx';
 
 function Tables() {
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const [tables, setTables] = useState("");
   const [servers, setServers] = useState([]);
   const token = JSON.parse(localStorage.getItem("user")).token;
 
@@ -32,13 +31,17 @@ function Tables() {
 
   const [dataSource, setDataSource] = useState([]);
 
-  function DeleteTable(event, id) {
-    event.stopPropagation();
-    callAPI(`http://localhost:5001/tables/${id}`, "DELETE", {}, token).then((res) => {
-      if (res === "Table deleted") setTables(tables.filter((table) => table._id !== id));
-    });
+  function deleteTable(id) {
+    const token = JSON.parse(localStorage.getItem("user")).token;
+    callAPI(`http://localhost:5001/tables/${id}`, "DELETE", {}, token)
+      .then((res) => {
+        if (res === "Table deleted") {
+          const updatedDataSource = dataSource.filter((table) => table.key !== id);
+          setDataSource(updatedDataSource);
+        }
+      })
+      .catch((error) => console.log(error));
   }
-  
   
     useEffect(() => {
     let fetchData = async () => {
@@ -100,13 +103,13 @@ function Tables() {
           </div>
           <div>
             <Popover title={"You sure you want to delete this table?"}>
-              <div onClick={() => DeleteTable(record._id, token, record.active)}>
-                { <DeleteFilled className='deleteIcon'/>}
+              <div>
+                 <DeleteFilled className='deleteIcon'onClick={() => deleteTable(record._id)} /> 
               </div>
             </Popover>
           </div>
         </div>
-      ),
+      ), 
     },
   ];
   
