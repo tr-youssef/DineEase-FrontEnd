@@ -2,18 +2,24 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { callAPI } from "../../../utils/FetchData.jsx";
 import { Link } from "react-router-dom";
-import { EditFilled, DeleteFilled } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { EditFilled, CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { Button, Popover } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import AntTable from "../../../components/AntTable/AntTable.jsx";
 import "./Users.css";
 
-export function Users() {
-  const id = useParams();
+function Users() {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const token = JSON.parse(localStorage.getItem("user"))?.token;
+
   const [fields, setFields] = useState([
     {
       name: ["firstName"],
+      value: "",
+    },
+    {
+      name: ["lastName"],
       value: "",
     },
     {
@@ -25,6 +31,10 @@ export function Users() {
       value: "",
     },
     {
+      name: ["active"],
+      Value: "",
+    },
+    {
       name: ["password"],
       value: "",
     },
@@ -33,19 +43,45 @@ export function Users() {
       value: "",
     },
   ]);
-  const { TextArea } = Input;
-  const handleClick = () => {
-    navigate("/manager/users");
-  };
+
   const [dataSource, setDataSource] = useState([]);
+
+  const employeeStatus = (id, token, status) => {
+    console.log("status", status);
+    if (id) {
+      callAPI(`http://localhost:5001/users/status/${id}`, "PATCH", { active: status }, token)
+        .then((data) => {
+          console.log("data", data);
+          console.log("Employee status updated:", data);
+          const updatedDataSource = dataSource.map((employee) => {
+            if (employee._id === id) {
+              return { ...employee, active: status };
+            } else {
+              return employee;
+            }
+          });
+          setDataSource(updatedDataSource);
+        })
+        .catch((error) => {
+          console.error("Failed to update employee status:", error);
+        });
+    }
+  };
+
   useEffect(() => {
     let fetchData = async () => {
       await callAPI(`http://localhost:5001/users`, "GET", "", token).then((res) => {
-        setDataSource(res);
+        const result = [];
+        res.map((x) => {
+          x.active ? result.push({ ...x, status: "active", key: x._id }) : result.push({ ...x, status: "inactive", key: x._id });
+        });
+        setDataSource(result);
+        console.log(result);
       });
     };
     fetchData();
-  }, []);
+  }, [dataSource]);
+
   const Columns = [
     {
       title: "Frist Name",
@@ -58,12 +94,31 @@ export function Users() {
       dataIndex: "lastName",
       key: "lastName",
       width: "20%",
+      title: "First Name",
+      dataIndex: "firstName",
+      key: "firstName",
+      width: "15%",
+    },
+    {
+      title: "Last Name",
+      dataIndex: "lastName",
+      key: "lastName",
+      width: "15%",
     },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
       width: "20%",
+      dataIndex: "role",
+      key: "role",
+      width: "15%",
+    },
+    {
+      title: "Active",
+      dataIndex: "status",
+      key: "status",
+      width: "15%",
     },
     {
       title: "Email",
@@ -74,121 +129,37 @@ export function Users() {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      width: "20%",
+      width: "25%",
       render: (text, record) => (
         <div className="Icons">
-          <EditFilled className="editIcon" onClick={(event) => EditEmployee(event, Users._id)} />
-          <DeleteFilled className="deleteIcon" onClick={(event) => DeleteEmployee(event, Users._id)} />
+          <div>
+            <Link to={`editEmployee/${record._id}`}>
+              <EditFilled className="editIcon" onClick={() => editEmployee(record._id)} />
+            </Link>
+          </div>
+          <div>
+            <Popover title={record.active ? "Change employee to inactive " : "Change employee to active"}>
+              <div onClick={() => employeeStatus(record._id, token, record.active)}>{record.active ? <CheckCircleOutlined /> : <CloseCircleOutlined />}</div>
+            </Popover>
+          </div>
         </div>
       ),
     },
   ];
 
   return (
-    <>
-      <AntTable dataSource={dataSource} Columns={Columns} />
-      <Link to={"addEmployee"} />
-      <Button className="employee-button" icon={<PlusCircleOutlined />} size={"large"}>
-        Add Employee
-      </Button>
-      <Link />
-      {/* <Form name="addEmployee" fields={fields} style={{ maxWidth: 400, marginTop: "40px" }} initialValues={{ remember: true }}>
-          <div className="EmployeeInput">
-            <div className="EmployeesInputLine">
-              <Form.Item
-                label="First name of employee"
-                name="firstName"
-                style={{ fontSize: "24px" }}
-                rules={[
-                  {
-                    required: true,
-                    message: "The first name of the employee is required!",
-                  },
-                ]}
-              >
-                <Input className="EmployeeInput" placeholder="Enter the first name of the employee" />
-              </Form.Item>
-              <Form.Item
-                label="Last name of employee"
-                name="lastName"
-                style={{ fontSize: "24px" }}
-                rules={[
-                  {
-                    required: true,
-                    message: "The last name of the employee is required!",
-                  },
-                ]}
-              >
-                <Input className="EmployeeInput" placeholder="Enter the last name of the employee" />
-              </Form.Item>
-            </div>
-            <div className="EmployeeInputLine">
-              <Form.Item
-                label="Email of employee"
-                name="email"
-                style={{ fontSize: "24px", width: "800px" }}
-                rules={[
-                  {
-                    required: true,
-                    message: "The email of the employee is required!",
-                  },
-                ]}
-              >
-                <TextArea className="EmployeeTextArea" placeholder="Enter the email of the employee" />
-              </Form.Item>
-              <Form.Item
-                label="Role of employee"
-                name="role"
-                style={{ fontSize: "24px" }}
-                rules={[
-                  {
-                    required: true,
-                    message: "The role of the employee is required!",
-                  },
-                ]}
-              >
-                <Input className="EmployeeInput" placeholder="Enter the role of the employee" />
-              </Form.Item>
-              <Form.Item
-                label="Temporary password of employee"
-                name="password"
-                style={{ fontSize: "24px" }}
-                rules={[
-                  {
-                    required: true,
-                    message: "The password of the employee is required!",
-                  },
-                ]}
-              >
-                <Input className="EmployeeInput" placeholder="Enter the password of the employee" />
-              </Form.Item>
-              <Form.Item
-                label="RestaurantId of employee"
-                name="restaurantId"
-                style={{ fontSize: "24px" }}
-                rules={[
-                  {
-                    required: true,
-                    message: "The restaurantId of the employee is required!",
-                  },
-                ]}
-              >
-                <Input className="EmployeeInput" placeholder="Enter the restaurantId of the employee" />
-              </Form.Item>
-            </div>
-          </div>
-          <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
-            {Object.keys(id).length === 0 ? "Create item" : "Save change"}
+    <div className="employees">
+      <div className="employeeButton">
+        <Link to={"addEmployee"}>
+          <Button className="employee-button" icon={<PlusCircleOutlined />} size={"large"}>
+            Add Employee
           </Button>
-          {Object.keys(id).length !== 0 ? (
-            <Button style={{ background: "#FFFFFF", color: "#f36805", marginRight: "20px", borderColor: "#f36805", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} onClick={deleteItem}>
-              Delete item
-            </Button>
-          ) : (
-            <></>
-          )}
-        </Form> */}
-    </>
+        </Link>
+      </div>
+      <div className="employeeTable">
+        <AntTable dataSource={dataSource} Columns={Columns} />
+      </div>
+    </div>
   );
 }
 

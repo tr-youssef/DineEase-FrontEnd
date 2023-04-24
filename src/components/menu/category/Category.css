@@ -1,0 +1,15 @@
+.Category {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 400px;
+  margin-right: 400px;
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+.CategoryInput {
+  width: 300px;
+}
+.CategoryForm {
+  margin: auto;
+}
