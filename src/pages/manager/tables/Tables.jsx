@@ -115,7 +115,7 @@ function Tables() {
       <div className="tableButton">
         <Link to={"addTable"}>
             <Button className='table-button' icon={<PlusCircleOutlined />} size={"large"}> 
-              Save Table
+              Add Table
             </Button>
         </Link>
       </div>
