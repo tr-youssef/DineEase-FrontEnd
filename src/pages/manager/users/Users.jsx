@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { callAPI } from "../../../utils/FetchData.js"
-import { useNavigate, useParams } from "react-router-dom";
+import {  useEffect,  useState } from 'react';
+import { useParams } from "react-router-dom";
+import { callAPI } from "../../../utils/FetchData";
 import { Link } from "react-router-dom";
 import { EditFilled, CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { Button, Popover } from "antd";
