@@ -1,0 +1,25 @@
+.Employee {
+  margin-top: 72px !important;
+  display: flex;
+  flex-direction: column;
+  padding-top: 38x;
+  width: 100%;
+  margin-left: 200px;
+  margin-bottom: 200px;
+  top: 50%;
+  left: 50%;
+}
+
+.form-group {
+  flex-basis: 50%; 
+  padding-right: 10px; 
+  box-sizing: border-box; 
+}
+
+.formButton {
+  background: rgb(243, 104, 5);
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  float: right;
+  margin-top: 10px;
+}

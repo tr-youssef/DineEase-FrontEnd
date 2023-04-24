@@ -12,6 +12,11 @@ import TakeOrder from "./pages/server/TakeOrder/TakeOrder.jsx";
 import SignIn from "./pages/login/SignIn.jsx";
 import Server from "./pages/server/Server.jsx";
 import RequireAuth from "./utils/RequireAuth.jsx";
+import AddForm from "./pages/manager/users/AddForm/AddForm.jsx"
+import AddTable from "./pages/manager/tables/AddTable/AddTable.jsx";
+import EditForm from "./pages/manager/users/EditForm/EditForm.jsx"
+import EditTable from "./pages/manager/tables/EditTable/EditTable";
+
 
 const router = createBrowserRouter([
   { path: "/signin", element: <SignIn /> },
@@ -48,8 +53,40 @@ const router = createBrowserRouter([
             element: <RequireAuth children={<Tables />} isAllowed={"manager"} />,
           },
           {
+            path: "/manager/tables/addTable",
+            element: (
+            <RequireAuth isAllowed={"manager"} >
+              <AddTable />
+            </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/tables/editTable/:id",
+            element: (
+            <RequireAuth isAllowed={"manager"} >
+              <EditTable />
+            </RequireAuth>
+            ),
+          },
+          {
             path: "/manager/users",
             element: <RequireAuth children={<Users />} isAllowed={"manager"} />,
+          },
+          {
+            path: "/manager/users/addEmployee",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <AddForm />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: "/manager/users/editEmployee/:id",
+            element: (
+              <RequireAuth isAllowed={"manager"}>
+                <EditForm />
+              </RequireAuth>
+            ),
           },
         ],
       },
