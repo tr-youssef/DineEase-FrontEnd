@@ -61,7 +61,7 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "/manager/tables/editTable",
+            path: "/manager/tables/editTable/:id",
             element: (
             <RequireAuth isAllowed={"manager"} >
               <EditTable />

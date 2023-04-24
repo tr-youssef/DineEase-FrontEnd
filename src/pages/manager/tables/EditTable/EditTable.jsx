@@ -11,6 +11,19 @@ const token = JSON.parse(localStorage.getItem("user")).token;
 const [fields, setFields] = useState([]);
 const navigate = useNavigate();
 const { id } = useParams();
+const [servers, setServers] = useState([]);
+const [selectedServerId, setSelectedServerId] = useState("");
+
+useEffect(() => {
+    callAPI("http://localhost:5001/users?role=server", "GET", null, token)
+      .then((data) => {
+        setServers(data);
+        console.log('data', data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     if (id) {
@@ -35,19 +48,15 @@ const { id } = useParams();
     } else {
       setFields([
         {
-          name: ["firstName"],
+          name: ["nameOfTable"],
           value: "",
         },
         {
-          name: ["lastName"],
+          name: ["capacity"],
           value: "",
         },
         {
-          name: ["email"],
-          value: "",
-        },
-        {
-          name: ["role"],
+          name: ["server"],
           value: "",
         },
       ]);
@@ -55,21 +64,38 @@ const { id } = useParams();
   }, [id]);
 
   const onFinish = (values) => {
+    const data = {
+        nameOfTable: values.nameOfTable,
+        capacity: values.capacity,
+        userId: values.selectedServerId,
+        status: "available",
+      }; 
     if (id) {
-      callAPI(`http://localhost:5001/users/${id}`, "PATCH", values, token)
+      callAPI(`http://localhost:5001/tables/${id}`, "PATCH", data, token)
         .then((response) => {
-          navigate("/manager/users");
+        console.log('response', response) 
+          navigate("/manager/tables");
         })
         .catch((error) => console.log(error))
+        
     }
-  }; 
+
+  };
+
 
   const handleClick = () => {
-    navigate("/manager/users");
+    navigate("/manager/tables");
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const { Option } = Select;
+
+  const handleServerSelect = (value) => {
+    setSelectedServerId(value);
+    console.log("Selected server ID:", value);
   };
 
 
@@ -125,7 +151,7 @@ const { id } = useParams();
           </Form.Item>
         <Form.Item>
         <Button style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "right", marginTop: "35px" }} size={"large"} htmlType="submit">
-          Add Table
+          Save Table
         </Button>
         </Form.Item>
       </Form>
