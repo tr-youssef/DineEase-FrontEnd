@@ -8,12 +8,11 @@
     color: #F36805;
 }
 
-.anticon-check-circle {
-    color: green;
+.anticon-delete {
+    color: #F36805;
+    margin-left: 20px;
 }
-.anticon-close-circle {
-    color: red;
-}
+
 
 .table-button {
     background: #f36805;

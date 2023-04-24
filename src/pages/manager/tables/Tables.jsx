@@ -7,10 +7,12 @@ import { Button, Popover } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import AntTable from '../../../components/AntTable/AntTable.jsx';
 import "./Tables.css";
+import { EditTable } from './EditTable/EditTable.jsx';
 
 function Tables() {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [servers, setServers] = useState([]);
   const token = JSON.parse(localStorage.getItem("user")).token;
 
   const [fields, setFields] = useState([
@@ -24,12 +26,8 @@ function Tables() {
     },
     {
       name: ["userId"],
-      value: "",
-    },
-    {
-        name: ["restaurantId"],
-        value: "",
-    },
+      value: ""
+    }
   ]);
 
   const [dataSource, setDataSource] = useState([]);
@@ -41,21 +39,27 @@ function Tables() {
     });
   }
   
-  useEffect(() => {
+  
+    useEffect(() => {
     let fetchData = async () => {
-      await callAPI(`http://localhost:5001/tables`, "GET", "", token).then((res) => {
-        const result=[]
-        res.map((x)=>{
-          x.active?result.push({...x,status:'active',key:x._id}):result.push({...x,status:'inactive',key:x._id})
-        })
+      try {
+        const  serverRes = await callAPI("http://localhost:5001/users?role=server", "GET", null, token)
+        setServers(serverRes);
+        const res = await callAPI("http://localhost:5001/tables", "GET", "", token);
+        
+        const result = res.map(table => ({
+          ...table,
+          key: table._id,
+        }));
+
         setDataSource(result);
-        console.log(result)
-      });
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
-  }, [dataSource]);
-  
-  
+  }, []);
+   
 
   const Columns = [
     {
@@ -74,26 +78,30 @@ function Tables() {
       dataIndex: 'userId',
       key:"role",
       width: '30%',
+      render: (serverId) => {
+        const server = servers.find((s) => s._id === serverId);
+        return server ? `${server.firstName} ${server.lastName}` : "";
+      },
     },
     {
       title: 'Action',
       dataIndex: 'action',
       key:"action",
-      width: "30%", 
+      width: "25%", 
       render: (text, record) => (
         <div className='Icons'>
           <div>
-            <Link to={`editEmployee/${record._id}`}>
+            <Link to={`editTable/${record._id}`}>
               <EditFilled
                 className="editIcon"
-                onClick={() => editEmployee(record._id)}
+                onClick={() => EditTable(record._id)}
               />
             </Link>
           </div>
           <div>
             <Popover title={"You sure you want to delete this table?"}>
               <div onClick={() => DeleteTable(record._id, token, record.active)}>
-                { <DeleteFilled />}
+                { <DeleteFilled className='deleteIcon'/>}
               </div>
             </Popover>
           </div>
@@ -107,7 +115,7 @@ function Tables() {
       <div className="tableButton">
         <Link to={"addTable"}>
             <Button className='table-button' icon={<PlusCircleOutlined />} size={"large"}> 
-              New Table
+              Save Table
             </Button>
         </Link>
       </div>
