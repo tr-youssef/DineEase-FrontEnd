@@ -1,6 +1,6 @@
 import {  useEffect,  useState } from 'react';
 import { useParams } from "react-router-dom";
-import { callAPI } from "../../../utils/FetchData.js"
+import { callAPI } from "../../../utils/FetchData";
 import { Link } from "react-router-dom";
 import { EditFilled, DeleteFilled } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";

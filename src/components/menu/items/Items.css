@@ -1,0 +1,25 @@
+.Items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 200px;
+  margin-right: 2O0px;
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+.ItemsInput {
+  display: flex;
+  flex-direction: column;
+}
+.ItemsForm {
+  width: 800px;
+}
+.ItemButton {
+  margin: 20px;
+}
+
+.ItemsInputLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -4,8 +4,7 @@ import SignIn from "../login/SignIn.jsx";
 import NewClientData from "./newClientsData.jsx";
 import AlreadyOrderedData from "./alreadyOrderedData.jsx";
 
-const Server = () => <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
-                    
+const Server = () => <Tabs defaultActiveKey="1" items={items} onChange={onChange} style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%, -50%)' }} />;
 
 const onChange = (key) => {
   console.log(key);
