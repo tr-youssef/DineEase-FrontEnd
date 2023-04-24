@@ -8,6 +8,7 @@ import "./Order.css";
 
 function Order({ booked, order, setOrder }) {
   const navigate = useNavigate();
+  const restaurantId = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
   function sum() {
     const sum = order.reduce(add, 0);
@@ -21,6 +22,7 @@ function Order({ booked, order, setOrder }) {
   function takeOrder() {
     const data = {
       bookedId: booked,
+      tableId: restaurantId.id,
       userId: user?.userId,
       items: order,
       subTotalAmount: item,

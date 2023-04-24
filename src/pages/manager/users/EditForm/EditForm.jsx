@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Input, Button, Form, Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { callAPI } from "../../../../utils/FetchData.js";
+import { callAPI } from "../../../../utils/FetchData.jsx";
 import "./EditForm.css";
 
-export function EditForm () {
-    
-const token = JSON.parse(localStorage.getItem("user")).token;
-const [fields, setFields] = useState([]);
-const navigate = useNavigate();
-const { id } = useParams();
+export function EditForm() {
+  const token = JSON.parse(localStorage.getItem("user")).token;
+  const [fields, setFields] = useState([]);
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
     if (id) {
@@ -64,9 +63,9 @@ const { id } = useParams();
         .then((response) => {
           navigate("/manager/users");
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     }
-  }; 
+  };
 
   const handleClick = () => {
     navigate("/manager/users");
@@ -76,14 +75,13 @@ const { id } = useParams();
     console.log("Failed:", errorInfo);
   };
 
-
   const { Option } = Select;
 
   return (
     <div className="Employee">
       <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
       <div className="EmployeeForm">
-        <Form name="addEmployee"  fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+        <Form name="addEmployee" fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
           <div className="EmployeeInputLine">
             <Form.Item
               label="First name of the employee"
@@ -135,11 +133,7 @@ const { id } = useParams();
                 },
               ]}
             >
-              <Select
-                className="EmployeeInput"
-                placeholder="Select the role of the employee"
-                size="middle"
-              >
+              <Select className="EmployeeInput" placeholder="Select the role of the employee" size="middle">
                 <Option value="manager">Manager</Option>
                 <Option value="chef">Chef</Option>
                 <Option value="server">Server</Option>

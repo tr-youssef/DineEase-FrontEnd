@@ -62,10 +62,10 @@ function CollapseMenu({ booked, order, setOrder }) {
                     {!booked && (
                       <div className="HeaderIcons">
                         <div className="Icons">
-                          <EditFilled onClick={(event) => EditCategory(event, categorie._id)} />
+                          <EditFilled style={{ color: "#ffffff" }} onClick={(event) => EditCategory(event, categorie._id)} />
                         </div>
                         <div className="Icons">
-                          <DeleteFilled onClick={(event) => DeleteCategory(event, categorie._id)} />
+                          <DeleteFilled style={{ color: "#ffffff", marginLeft: "0px" }} onClick={(event) => DeleteCategory(event, categorie._id)} />
                         </div>
                       </div>
                     )}

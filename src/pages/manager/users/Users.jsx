@@ -9,49 +9,14 @@ import AntTable from "../../../components/AntTable/AntTable.jsx";
 import "./Users.css";
 
 function Users() {
-  const navigate = useNavigate();
-  const { id } = useParams();
   const token = JSON.parse(localStorage.getItem("user"))?.token;
-
-  const [fields, setFields] = useState([
-    {
-      name: ["firstName"],
-      value: "",
-    },
-    {
-      name: ["lastName"],
-      value: "",
-    },
-    {
-      name: ["email"],
-      value: "",
-    },
-    {
-      name: ["role"],
-      value: "",
-    },
-    {
-      name: ["active"],
-      Value: "",
-    },
-    {
-      name: ["password"],
-      value: "",
-    },
-    {
-      name: ["restaurantId"],
-      value: "",
-    },
-  ]);
 
   const [dataSource, setDataSource] = useState([]);
 
   const employeeStatus = (id, token, status) => {
-    console.log("status", status);
     if (id) {
       callAPI(`http://localhost:5001/users/status/${id}`, "PATCH", { active: status }, token)
         .then((data) => {
-          console.log("data", data);
           console.log("Employee status updated:", data);
           const updatedDataSource = dataSource.map((employee) => {
             if (employee._id === id) {
@@ -76,7 +41,6 @@ function Users() {
           x.active ? result.push({ ...x, status: "active", key: x._id }) : result.push({ ...x, status: "inactive", key: x._id });
         });
         setDataSource(result);
-        console.log(result);
       });
     };
     fetchData();
@@ -94,25 +58,12 @@ function Users() {
       dataIndex: "lastName",
       key: "lastName",
       width: "20%",
-      title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName",
-      width: "15%",
-    },
-    {
-      title: "Last Name",
-      dataIndex: "lastName",
-      key: "lastName",
-      width: "15%",
     },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
       width: "20%",
-      dataIndex: "role",
-      key: "role",
-      width: "15%",
     },
     {
       title: "Active",
@@ -134,11 +85,11 @@ function Users() {
         <div className="Icons">
           <div>
             <Link to={`editEmployee/${record._id}`}>
-              <EditFilled className="editIcon" onClick={() => editEmployee(record._id)} />
+              <EditFilled onClick={() => editEmployee(record._id)} />
             </Link>
           </div>
           <div>
-            <Popover title={record.active ? "Change employee to inactive " : "Change employee to active"}>
+            <Popover className="ActiveInactive" title={record.active ? "Change employee to inactive " : "Change employee to active"}>
               <div onClick={() => employeeStatus(record._id, token, record.active)}>{record.active ? <CheckCircleOutlined /> : <CloseCircleOutlined />}</div>
             </Popover>
           </div>

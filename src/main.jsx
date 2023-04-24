@@ -16,6 +16,7 @@ import AddForm from "./pages/manager/users/AddForm/AddForm.jsx";
 import AddTable from "./pages/manager/tables/AddTable/AddTable.jsx";
 import EditForm from "./pages/manager/users/EditForm/EditForm.jsx";
 import EditTable from "./pages/manager/tables/EditTable/EditTable";
+import Chef from "./pages/chef/Chef.jsx";
 
 const router = createBrowserRouter([
   { path: "/signin", element: <SignIn /> },
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
       {
         path: "server/takeorder/:id",
         element: <RequireAuth children={<TakeOrder />} isAllowed={"server"} />,
+      },
+      {
+        path: "chef",
+        element: <RequireAuth children={<Chef />} isAllowed={"chef"} />,
       },
     ],
   },

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Input, Button, Form, Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { callAPI } from "../../../../utils/FetchData.js";
+import { callAPI } from "../../../../utils/FetchData.jsx";
 import "./AddForm.css";
 
-export function AddForm () {
+export function AddForm() {
   const navigate = useNavigate();
   const id = useParams();
   const token = JSON.parse(localStorage.getItem("user")).token;
@@ -38,10 +38,10 @@ export function AddForm () {
       lastName: values.lastName,
       email: values.email,
       role: values.role,
-      password: values.role.toLowerCase(), 
+      password: values.role.toLowerCase(),
       confirmPassword: values.confirmPassword,
     };
-  
+
     if (Object.keys(id).length === 0) {
       callAPI("http://localhost:5001/users/signup", "POST", data, token).then(() => {
         navigate("/manager/users");
@@ -52,7 +52,6 @@ export function AddForm () {
       });
     }
   };
-  
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -64,7 +63,7 @@ export function AddForm () {
     <div className="Employee">
       <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
       <div className="EmployeeForm">
-        <Form name="addEmployee"  fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+        <Form name="addEmployee" fields={fields} style={{ maxWidth: 600, marginTop: "40px" }} initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
           <div className="EmployeeInputLine">
             <Form.Item
               label="First name of the employee"
@@ -116,11 +115,7 @@ export function AddForm () {
                 },
               ]}
             >
-              <Select
-                className="EmployeeInput"
-                placeholder="Select the role of the employee"
-                size="middle"
-              >
+              <Select className="EmployeeInput" placeholder="Select the role of the employee" size="middle">
                 <Option value="manager">Manager</Option>
                 <Option value="chef">Chef</Option>
                 <Option value="server">Server</Option>
@@ -136,7 +131,5 @@ export function AddForm () {
     </div>
   );
 }
-
-
 
 export default AddForm;

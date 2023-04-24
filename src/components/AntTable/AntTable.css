@@ -1,17 +1,16 @@
 .antTable {
-    margin-top: 110px;
-    margin-left: 157px;
-    flex-direction: column-reverse;
-    width: 60vw;
+  margin-top: 110px;
+  flex-direction: column-reverse;
+  width: 60vw;
 }
 
 .ant-table {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-collapse: collapse;
-    border-bottom-left-radius: 8px !important;
-    border-bottom-right-radius: 8px !important
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-collapse: collapse;
+  border-bottom-left-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
 }
-.ant-table-wrapper .ant-table-thead >tr>th {
-    background: #f36805;
-    color: white;
+.ant-table-wrapper .ant-table-thead > tr > th {
+  background: #f36805;
+  color: white;
 }
