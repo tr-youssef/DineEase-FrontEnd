@@ -45,7 +45,7 @@ const AlreadyOrderedData = () => {
         });
       };
       fetchData();
-  }, []);
+  }, []); 
   
   return (
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-50px' }}>

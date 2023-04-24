@@ -22,9 +22,9 @@ const NewClientData = () => {
     
     {
       title: 'Order',
-      dataIndex: 'bookingId',
-      key: 'bookingId',
-      render: (bookingId) => <Link to={"/server/takeOrder/"+ bookingId}><img src={ordericonimage}  alt="Take Order" /></Link>
+      dataIndex: '_id',
+      key: '_id',
+      render: (_id) => <Link to={"/server/takeOrder/"+ _id}><img src={ordericonimage}  alt="Take Order" /></Link>
     },
   ];
   const token = JSON.parse(localStorage.getItem("user")).token;
