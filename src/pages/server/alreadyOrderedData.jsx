@@ -30,7 +30,7 @@ const AlreadyOrderedData = () => {
       title: 'Bill',
       dataIndex: 'bookingId',
       key: 'bookingId',
-      render: (bookingId) => <Link to={"/server/takeOrder/" + bookingId}><img src={ordericonimage} alt="Take Order" /></Link>
+      render: (bookingId) => <Link to={"/server/takeOrder/" + bookingId}><img src={billiconimage} alt="Bill" /></Link>
     }
   ];
   const token = JSON.parse(localStorage.getItem("user")).token;
