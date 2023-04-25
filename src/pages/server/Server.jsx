@@ -3,7 +3,11 @@ import { Tabs } from "antd";
 import NewClient from "./NewClients/NewClients.jsx";
 import AlreadyOrdered from "./AlreadyOrdered/AlreadyOrdered.jsx";
 
-const Server = () => <Tabs defaultActiveKey="1" items={items} />;
+const Server = () => (
+  <div className="tabs-container">
+    <Tabs defaultActiveKey="1" items={items} />
+  </div>
+);
 
 const items = [
   {
