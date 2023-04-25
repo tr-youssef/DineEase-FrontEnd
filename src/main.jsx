@@ -11,6 +11,7 @@ import Items from "./pages/manager/menu/items/Items.jsx";
 import TakeOrder from "./pages/server/TakeOrder/TakeOrder.jsx";
 import SignIn from "./pages/login/SignIn.jsx";
 import Server from "./pages/server/Server.jsx";
+import Receptionist from "./pages/receptionist/Receptionist";
 import RequireAuth from "./utils/RequireAuth.jsx";
 import AddForm from "./pages/manager/users/AddForm/AddForm.jsx";
 import AddTable from "./pages/manager/tables/AddTable/AddTable.jsx";
@@ -101,6 +102,10 @@ const router = createBrowserRouter([
       {
         path: "chef",
         element: <RequireAuth children={<Chef />} isAllowed={"chef"} />,
+      },
+      {
+        path: "receptionist",
+        element: <RequireAuth children={<Receptionist />} isAllowed={"receptionist"} />,
       },
     ],
   },
