@@ -22,7 +22,7 @@ export function EditTable() {
 
   useEffect(() => {
     if (id) {
-      callAPI(`http://localhost:5001/tables/${id}`, "GET", {}, token)
+      callAPI(`http://localhost:5001/tables/getTable/${id}`, "GET", {}, token)
         .then((response) => {
           setFields([
             {

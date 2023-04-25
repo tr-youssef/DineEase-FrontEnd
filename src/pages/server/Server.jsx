@@ -1,23 +1,20 @@
 import React from "react";
 import { Tabs } from "antd";
-import NewClientData from "./newClientsData.jsx";
-import AlreadyOrderedData from "./alreadyOrderedData.jsx";
+import NewClient from "./NewClients/NewClients.jsx";
+import AlreadyOrdered from "./AlreadyOrdered/AlreadyOrdered.jsx";
 
-const Server = () => <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
+const Server = () => <Tabs defaultActiveKey="1" items={items} />;
 
-const onChange = (key) => {
-  console.log(key);
-};
 const items = [
   {
     key: "1",
     label: `New Clients`,
-    children: <NewClientData />,
+    children: <NewClient />,
   },
   {
     key: "2",
     label: `Already ordered`,
-    children: <AlreadyOrderedData />,
+    children: <AlreadyOrdered />,
   },
 ];
 
