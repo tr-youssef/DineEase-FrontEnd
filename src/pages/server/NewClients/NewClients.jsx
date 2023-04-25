@@ -33,7 +33,7 @@ const NewClientData = () => {
   useEffect(() => {
     let fetchData = async () => {
       // TODO: Update with correct server id
-      await callAPI(`http://localhost:5001/tables/availableTables/`, "GET", "", user.token).then((res) => {
+      await callAPI(`http://localhost:5001/booked/availableTables`, "GET", "", user.token).then((res) => {
         const result = res.map((table) => ({
           ...table,
           key: table._id,

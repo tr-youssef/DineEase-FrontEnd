@@ -34,7 +34,7 @@ const AlreadyOrderedData = () => {
   useEffect(() => {
     let fetchData = async () => {
       // TODO: Update with correct server id
-      await callAPI(`http://localhost:5001/tables/alreadyOrdered`, "GET", "", token).then((res) => {
+      await callAPI(`http://localhost:5001/orders/alreadyOrdered`, "GET", "", token).then((res) => {
         const result = res.map((table) => ({
           ...table,
           key: table._id,
