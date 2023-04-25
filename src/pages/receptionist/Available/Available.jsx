@@ -13,7 +13,7 @@ function AvailableData() {
     useEffect(() => {
         let fetchData = async () => {
           try {
-            const res = await callAPI(`http://localhost:5001/tables/?status=available`, "GET", "", user.token);
+            const res = await callAPI(`http://localhost:5001/tables/`, "GET", "", user.token);
             console.log('res', res)
       
             const result = res.map((table) => ({
