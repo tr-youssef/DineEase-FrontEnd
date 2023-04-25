@@ -98,6 +98,7 @@ export function EditTable() {
         <Form.Item
           label="Server"
           name="selectedServerId"
+          initialvalues="selectedServerId"
           rules={[
             {
               required: true,
