@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { Space, Table, Tag } from "antd";
-import ordericonimage from "../../assets/OrderIcon.png";
-import billiconimage from "../../assets/BillIcon.png";
-import AntTable from "../../components/AntTable/AntTable.jsx";
-import { callAPI } from "../../utils/FetchData";
+import billiconimage from "../../../assets/BillIcon.png";
+import AntTable from "../../../components/AntTable/AntTable.jsx";
+import { callAPI } from "../../../utils/FetchData";
 import { Link } from "react-router-dom";
+import "./alreadyOrderedData.css";
 
 const AlreadyOrderedData = () => {
   const Columns = [
@@ -24,7 +23,7 @@ const AlreadyOrderedData = () => {
       key: "bookingId",
       render: (bookingId) => (
         <Link to={"/server/takeOrder/" + bookingId}>
-          <img src={billiconimage} alt="Bill" />
+          <img src={billiconimage} alt="Bill" className="BookinIcon" />
         </Link>
       ),
     },
@@ -35,9 +34,12 @@ const AlreadyOrderedData = () => {
   useEffect(() => {
     let fetchData = async () => {
       // TODO: Update with correct server id
-      await callAPI(`http://localhost:5001/tables/alreadyorderedtables/1`, "GET", "", token).then((res) => {
-        console.log("res", res);
-        setData(res);
+      await callAPI(`http://localhost:5001/tables/alreadyOrdered`, "GET", "", token).then((res) => {
+        const result = res.map((table) => ({
+          ...table,
+          key: table._id,
+        }));
+        setData(result);
       });
     };
     fetchData();

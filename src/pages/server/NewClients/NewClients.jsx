@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import ordericonimage from "../../assets/OrderIcon.png";
-import AntTable from "../../components/AntTable/AntTable.jsx";
-import { callAPI } from "../../utils/FetchData";
+import ordericonimage from "../../../assets/OrderIcon.png";
+import AntTable from "../../../components/AntTable/AntTable.jsx";
+import { callAPI } from "../../../utils/FetchData";
 import { Link } from "react-router-dom";
 
 const NewClientData = () => {
@@ -33,8 +33,12 @@ const NewClientData = () => {
   useEffect(() => {
     let fetchData = async () => {
       // TODO: Update with correct server id
-      await callAPI(`http://localhost:5001/tables/availableTables/1`, "GET", "", user.token).then((res) => {
-        setData(res);
+      await callAPI(`http://localhost:5001/tables/availableTables/`, "GET", "", user.token).then((res) => {
+        const result = res.map((table) => ({
+          ...table,
+          key: table._id,
+        }));
+        setData(result);
       });
     };
     fetchData();
