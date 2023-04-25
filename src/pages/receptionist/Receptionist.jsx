@@ -6,7 +6,6 @@ import "./Receptionist.css"
 
 function Receptionist() {
     const onChange = (key) => {
-        console.log(key);
       };
 
       const items = [

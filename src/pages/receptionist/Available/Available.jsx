@@ -1,11 +1,13 @@
 import React from 'react'
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { callAPI } from "../../../utils/FetchData.jsx"
 import AntTable from "../../../components/AntTable/AntTable.jsx"
 import { FormOutlined } from "@ant-design/icons";
 
 function AvailableData() {
     const user = JSON.parse(localStorage.getItem("user"));
+    const restaurantId = useParams();
     const [dataSource, setDataSource] = useState([]);
 
     useEffect(() => {
@@ -20,6 +22,7 @@ function AvailableData() {
             }));
       
             setDataSource(result);
+            console.log('result', result)
           } catch (error) {
             console.log(error);
           }
@@ -27,18 +30,21 @@ function AvailableData() {
         fetchData();
       }, []);
 
-      function bookCustomer() {
+      function bookCustomer(tableId) {
         const data = {
-          bookedId: booked,
-          tableId: restaurantId.id,
-          status: "New",
+          tableId: tableId,
+          status: "NewClient",
         };
-        callAPI("http://localhost:5001/orders", "POST", data, user?.token).then(() => {
-          navigate("/server");
-        });
-      }
+        callAPI(`http://localhost:5001/booked/`, "POST", data, user.token)
+          .then((response) => {
+            if (response.status === 200) {
+              callAPI(`http://localhost:5001/tables/status/${tableId}`, "PATCH", { status: "filled" }, user.token)
+                .catch((error) => console.log(error));
+            }
+          })
+          .catch((error) => console.log(error));
+      };
       
-
     const Columns = [
         {
           title: "Table No.",
@@ -57,7 +63,7 @@ function AvailableData() {
           render: (text, record) => (
             <div className="Icons">
               <div>
-                <FormOutlined  onClick={bookCustomer} />
+                <FormOutlined  onClick={() => bookCustomer(record._id)} />
               </div>
             </div>
           ),
