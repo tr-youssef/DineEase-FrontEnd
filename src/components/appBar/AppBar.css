@@ -16,3 +16,10 @@
   font-size: 250%;
   align-items: center;
 }
+.ServerProfile 
+{
+  display: flex;
+  gap: 100px;
+  margin-top: 10px;
+}
+.Serve
