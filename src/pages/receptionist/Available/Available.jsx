@@ -35,18 +35,14 @@ function AvailableData() {
           status: "NewClient",
         };
         callAPI(`http://localhost:5001/booked/`, "POST", data, user.token)
-          .then((response) => {
-            if (response.status === 200) {
+          .then(() => {
               const statusTable = {
-                tableId: tableId,
                 status: "filled",
               };
               console.log('statusTable', statusTable)
-              callAPI(`http://localhost:5001/tables/status/`, "PATCH", statusTable, user.token)
-                .catch((error) => console.log(error));
+              callAPI(`http://localhost:5001/tables/status/${ tableId}`, "PATCH", statusTable, user.token)
             }
-          })
-          .catch((error) => console.log(error));
+          ) 
       };
       
     const Columns = [
