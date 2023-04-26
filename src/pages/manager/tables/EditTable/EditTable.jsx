@@ -50,6 +50,7 @@ export function EditTable() {
       userId: values.selectedServerId,
       status: "available",
     };
+
     if (id) {
       callAPI(`http://localhost:5001/tables/${id}`, "PATCH", data, token)
         .then((response) => {
@@ -106,7 +107,7 @@ export function EditTable() {
             },
           ]}
         >
-          <Select>
+          <Select >
             {servers &&
               servers.map((server) => (
                 <Option key={server._id} value={server._id}>
