@@ -7,13 +7,12 @@ import { FormOutlined } from "@ant-design/icons";
 
 function AvailableData() {
     const user = JSON.parse(localStorage.getItem("user"));
-    const restaurantId = useParams();
     const [dataSource, setDataSource] = useState([]);
 
     useEffect(() => {
         let fetchData = async () => {
           try {
-            const res = await callAPI(`http://localhost:5001/tables/`, "GET", "", user.token);
+            const res = await callAPI(`http://localhost:5001/tables/availableTables/`, "GET", "", user.token);
             console.log('res', res)
       
             const result = res.map((table) => ({
@@ -71,7 +70,7 @@ function AvailableData() {
       ];
       
   return (
-    <div>
+    <div className='availableTable'>
         <AntTable Columns={Columns} dataSource={dataSource}/>
     </div>
   )
