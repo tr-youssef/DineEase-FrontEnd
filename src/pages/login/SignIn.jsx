@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, message, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import { callAPI } from "../../utils/FetchData.jsx";
 import loginImage from "../../assets/WebsiteImage.png";
@@ -7,11 +7,19 @@ import logoImage from "../../assets/Logo1.png";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
+
   const onFinish = async (values) => {
     const user = await callAPI("http://localhost:5001/users/signin", "POST", values);
-    if (user) {
+    console.log("user", user);
+    if (user.userId) {
       window.localStorage.setItem("user", JSON.stringify(user));
       navigate(`/${user.role}`);
+    } else {
+      messageApi.open({
+        type: "error",
+        content: user.message,
+      });
     }
   };
 
@@ -20,6 +28,7 @@ const SignIn = () => {
   };
   return (
     <div style={{ display: "flex" }}>
+      {contextHolder}
       <div style={{ flex: 1, overflow: "hidden", width: "100%", height: "99vh" }}>
         <img src={loginImage} style={{}}></img>
       </div>
