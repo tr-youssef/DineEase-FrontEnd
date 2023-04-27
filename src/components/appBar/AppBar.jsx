@@ -37,7 +37,7 @@ function AppBar() {
         <ClockCircleTwoTone twoToneColor="#f36805" size={50} />
         <Clock />
       </div>
-      <div className="ServerProfile">
+      <div className="NotificationProfile">
   {role === "server" && (
           <div className="Notification">
             <Badge count={NumberOfNewClient}>
