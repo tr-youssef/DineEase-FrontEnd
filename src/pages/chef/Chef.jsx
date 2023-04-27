@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 import { callAPI } from "../../utils/FetchData.jsx";
+import { io } from "socket.io-client";
 import "./Chef.css";
 
 function Chef() {
   const [orders, setOrders] = useState([]);
-  const [refresh, setRefresh] = useState();
   const token = JSON.parse(localStorage.getItem("user"))?.token;
   useEffect(() => {
     let fetchData = async () => {
@@ -14,15 +14,18 @@ function Chef() {
       });
     };
     fetchData();
-    setInterval(() => {
-      setRefresh(Math.random());
-    }, 5000);
-  }, [refresh]);
+  }, []);
+  useEffect(() => {
+    const socket = io("http://localhost:5002");
+    socket.on("orders", (data) => {
+      console.log("data", data);
+      setOrders(data);
+    });
+  }, []);
+
   async function changeStatus(id) {
     const data = { status: "Ready" };
-    await callAPI(`http://localhost:5001/orders/status/${id}`, "PATCH", data, token).then(() => {
-      setRefresh(Date.now());
-    });
+    await callAPI(`http://localhost:5001/orders/status/${id}`, "PATCH", data, token).then(() => {});
   }
 
   return (

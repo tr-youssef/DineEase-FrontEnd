@@ -79,11 +79,7 @@ function Tables() {
             </Link>
           </div>
           <div>
-            <Popover title={"You sure you want to delete this table?"}>
-              <div>
-                <DeleteFilled className="deleteIcon" onClick={() => deleteTable(record._id)} />
-              </div>
-            </Popover>
+            <DeleteFilled className="deleteIcon" onClick={() => deleteTable(record._id)} />
           </div>
         </div>
       ),

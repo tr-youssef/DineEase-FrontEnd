@@ -17,7 +17,6 @@ function Users() {
     if (id) {
       callAPI(`http://localhost:5001/users/status/${id}`, "PATCH", { active: status }, token)
         .then((data) => {
-          console.log("Employee status updated:", data);
           const updatedDataSource = dataSource.map((employee) => {
             if (employee._id === id) {
               return { ...employee, active: status };
