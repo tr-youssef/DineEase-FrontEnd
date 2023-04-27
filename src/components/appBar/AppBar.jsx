@@ -2,7 +2,7 @@ import React from "react";
 import "./AppBar.css";
 import { ClockCircleTwoTone } from "@ant-design/icons";
 import Clock from "../clock/Clock.jsx";
-import Profil from "../profil/profil.jsx";
+import Profil from "../profil/Profil.jsx"
 
 function AppBar() {
   let auth = JSON.parse(localStorage.getItem("user"));
