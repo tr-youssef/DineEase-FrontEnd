@@ -23,8 +23,14 @@ function AppBar() {
         <ClockCircleTwoTone twoToneColor="#f36805" size={50} />
         <Clock />
       </div>
-      <div className= "ServerProfile">
-        {role === "server" && <div className="Notification"> <img className="OrderLogo" src={OrderLogo} alt="Order Logo" /></div>}
+      <div className="ServerProfile">
+  {role === "server" && (
+          <div className="Notification">
+      <img className="OrderLogo" src={OrderLogo} alt="Order Logo" />
+      <img className="ServeDishLogo" src={ServeDish} alt="Serve Dish Logo" />
+     
+    </div>
+  )}
         <div className="Profil">
           <Profil avatar={avatar} name={name} role={role} />
         </div>
