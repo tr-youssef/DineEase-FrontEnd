@@ -35,6 +35,7 @@ function AvailableData() {
       };
       callAPI(`http://localhost:5001/tables/status/${tableId}`, "PATCH", statusTable, user.token);
     });
+    setDataSource(dataSource.filter((data) => data._id !== tableId));
   }
 
   const Columns = [

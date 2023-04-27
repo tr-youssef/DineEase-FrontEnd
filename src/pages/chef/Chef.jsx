@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 import { callAPI } from "../../utils/FetchData.jsx";
-import { io } from "socket.io-client";
+import { socket } from "../../utils/Socket.jsx";
 import "./Chef.css";
 
 function Chef() {
@@ -15,12 +15,17 @@ function Chef() {
     };
     fetchData();
   }, []);
+
   useEffect(() => {
-    const socket = io("http://localhost:5002");
+    socket.connect();
     socket.on("orders", (data) => {
       console.log("data", data);
       setOrders(data);
     });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   async function changeStatus(id) {
