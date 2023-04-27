@@ -1,6 +1,7 @@
 .Profil {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .NameRole {
   margin: 10px;
@@ -17,6 +18,17 @@
   font-weight: 300;
 }
 
-.userLogoutBtn {
-  color: #f36805;
+.ant-dropdown-menu {
+  background-color: #f36805 !important;
+  color: white;
 }
+
+.logoutIcon {
+  color: white;
+}
+
+.ant-dropdown-menu-item, a {
+  color: white !important;
+}
+
+
