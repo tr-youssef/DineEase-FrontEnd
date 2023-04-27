@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
 import ordericonimage from "../../../assets/OrderIcon.png";
 import AntTable from "../../../components/AntTable/AntTable.jsx";
-import { callAPI } from "../../../utils/FetchData";
 import { Link } from "react-router-dom";
+import { callAPI } from "../../../utils/FetchData.jsx";
+import { useEffect, useState } from "react";
 
 const NewClientData = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+  const [availableData, setAvailableData] = useState([]);
   const Columns = [
     {
       title: "Table Number",
@@ -28,25 +30,19 @@ const NewClientData = () => {
       ),
     },
   ];
-  const user = JSON.parse(localStorage.getItem("user"));
-  const [data, setData] = useState([]);
+
   useEffect(() => {
-    let fetchData = async () => {
-      // TODO: Update with correct server id
-      await callAPI(`http://localhost:5001/booked/availableTables`, "GET", "", user.token).then((res) => {
+   callAPI(`http://localhost:5001/booked/availableTables`, "GET", "", user.token).then((res) => {
         const result = res.map((table) => ({
           ...table,
           key: table._id,
         }));
-        setData(result);
+        setAvailableData(result);
       });
-    };
-    fetchData();
   }, []);
-
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: "-50px" }}>
-      <AntTable dataSource={data} Columns={Columns} />
+      <AntTable dataSource={availableData} Columns={Columns} />
     </div>
   );
 };
