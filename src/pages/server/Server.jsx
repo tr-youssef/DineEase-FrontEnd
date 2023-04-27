@@ -1,14 +1,12 @@
-import React from "react";
+
 import { Tabs } from "antd";
 import NewClient from "./NewClients/NewClients.jsx";
 import AlreadyOrdered from "./AlreadyOrdered/AlreadyOrdered.jsx";
 
-const Server = () => (
-  <div className="tabs-container">
-    <Tabs defaultActiveKey="1" items={items} />
-  </div>
-);
+const Server = () => {
+ 
 
+  
 const items = [
   {
     key: "1",
@@ -18,8 +16,14 @@ const items = [
   {
     key: "2",
     label: `Already ordered`,
-    children: <AlreadyOrdered />,
+    children: <AlreadyOrdered  />,
   },
 ];
+  return (
+  <div className="tabs-container">
+    <Tabs defaultActiveKey="1" items={items} />
+    </div>
+  )
+}
 
 export default Server;

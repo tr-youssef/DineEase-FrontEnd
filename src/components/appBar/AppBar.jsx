@@ -1,10 +1,13 @@
 import React from "react";
 import "./AppBar.css";
 import { ClockCircleTwoTone } from "@ant-design/icons";
+import {Badge,Avatar} from "antd"
 import Clock from "../clock/Clock.jsx";
 import Profil from "../profil/profil.jsx";
 import OrderLogo from "../../assets/menu1.png";
 import ServeDish from "../../assets/servingDish.png";
+import { useEffect, useState } from "react";
+import { callAPI } from "../../utils/FetchData";
 
 
 function AppBar() {
@@ -12,6 +15,17 @@ function AppBar() {
   const avatar = "https://i.pravatar.cc/100";
   const name = auth?.firstName + " " + auth?.lastName;
   const role = auth?.role;
+  useEffect(() => {
+    callAPI(`http://localhost:5001/booked/availableTables`, "GET", "", auth.token).then((res) => {
+      const result = res.map((table) => ({
+        ...table,
+        key: table._id,
+      }));
+      setNumberOfNewClient(result.length);
+    });
+}, []);
+
+  const [NumberOfNewClient, setNumberOfNewClient] = useState(0);
 
   return (
     <div className="AppBar">
@@ -26,7 +40,9 @@ function AppBar() {
       <div className="ServerProfile">
   {role === "server" && (
           <div className="Notification">
-      <img className="OrderLogo" src={OrderLogo} alt="Order Logo" />
+            <Badge count={NumberOfNewClient}>
+      <Avatar shape="square" size="large" src={OrderLogo} />
+    </Badge>
       <img className="ServeDishLogo" src={ServeDish} alt="Serve Dish Logo" />
      
     </div>
