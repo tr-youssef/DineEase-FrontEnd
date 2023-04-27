@@ -18,7 +18,6 @@ function FilledData() {
           key: table._id,
         }));
         setDataSource(result);
-        console.log('result', result)
       } catch (error) {
         console.log(error);
       }
