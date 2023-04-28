@@ -1,7 +1,7 @@
 import React from "react";
 import "./AppBar.css";
 import { ClockCircleTwoTone } from "@ant-design/icons";
-import { Badge, Avatar } from "antd";
+import { Badge, Avatar, Dropdown, Menu } from "antd";
 import Clock from "../clock/Clock.jsx";
 import Profil from "../profil/profil.jsx";
 import OrderLogo from "../../assets/menu1.png";
@@ -25,6 +25,8 @@ function AppBar() {
     });
   }, []);
 
+  const menuProps = { OrderReady
+  }
   return (
     <div className="AppBar">
       <div className="LogoContainer">
@@ -40,9 +42,12 @@ function AppBar() {
             <Badge count={NumberOfNewClient}>
               <Avatar shape="square" size="large" src={OrderLogo} />
             </Badge>
-            <Badge count={0}>
+            <Dropdown
+              menu={menuProps} >
+               <Badge count={0}>
               <Avatar shape="square" size="large" src={ServeDish} />
             </Badge>
+              </Dropdown>
           </div>
         )}
         <div className="Profil">
