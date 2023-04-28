@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Input, Button, Form, Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -8,10 +8,10 @@ import "./EditTable.css";
 const { Option } = Select;
 
 export function EditTable() {
-  const token = JSON.parse(localStorage.getItem("user")).token;
-  const [fields, setFields] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
+  const token = JSON.parse(localStorage.getItem("user")).token;
+  const [fields, setFields] = useState([]);
   const [servers, setServers] = useState([]);
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export function EditTable() {
             },
           ]}
         >
-          <Select >
+          <Select>
             {servers &&
               servers.map((server) => (
                 <Option key={server._id} value={server._id}>

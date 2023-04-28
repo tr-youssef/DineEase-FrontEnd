@@ -11,7 +11,6 @@ const SignIn = () => {
 
   const onFinish = async (values) => {
     const user = await callAPI("http://localhost:5001/users/signin", "POST", values);
-    console.log("user", user);
     if (user.userId) {
       window.localStorage.setItem("user", JSON.stringify(user));
       navigate(`/${user.role}`);

@@ -19,7 +19,6 @@ function Chef() {
   useEffect(() => {
     socket.connect();
     socket.on("orders", (data) => {
-      console.log("data", data);
       setOrders(data);
     });
 

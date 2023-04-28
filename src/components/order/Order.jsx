@@ -30,6 +30,7 @@ function Order({ booked, order, setOrder }) {
       status: "New",
     };
     callAPI("http://localhost:5001/orders", "POST", data, user?.token).then(() => {
+      callAPI(`http://localhost:5001/booked/${bookedId.id}`, "PATCH", { status: "AlreadyOrdered" }, user?.token).then(() => {});
       navigate("/server");
     });
   }

@@ -46,7 +46,7 @@ export function TableForm() {
       nameOfTable: values.nameOfTable,
       capacity: values.capacity,
       userId: values.selectedServerId,
-      status: "available",
+      status: "Available",
     };
     callAPI("http://localhost:5001/tables/", "POST", data, token).then(() => {
       navigate("/manager/tables");
