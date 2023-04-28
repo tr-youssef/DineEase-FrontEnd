@@ -25,8 +25,8 @@ function AppBar() {
     });
   }, []);
 
-  const menuProps = { OrderReady
-  }
+  // const menuProps = { OrderReady
+  // }
   return (
     <div className="AppBar">
       <div className="LogoContainer">
@@ -42,12 +42,12 @@ function AppBar() {
             <Badge count={NumberOfNewClient}>
               <Avatar shape="square" size="large" src={OrderLogo} />
             </Badge>
-            <Dropdown
-              menu={menuProps} >
+            {/* <Dropdown */}
+              {/* menu={menuProps} > */}
                <Badge count={0}>
               <Avatar shape="square" size="large" src={ServeDish} />
             </Badge>
-              </Dropdown>
+              {/* </Dropdown> */}
           </div>
         )}
         <div className="Profil">
