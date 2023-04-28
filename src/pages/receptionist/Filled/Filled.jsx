@@ -23,7 +23,7 @@ function FilledData() {
       }
     };
     fetchData();
-  }, [dataSource]);
+  }, []);
 
   const Columns = [
     {

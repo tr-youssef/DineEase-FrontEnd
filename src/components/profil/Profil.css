@@ -1,6 +1,7 @@
 .Profil {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .NameRole {
   margin: 10px;
@@ -16,3 +17,18 @@
   font-size: 14px;
   font-weight: 300;
 }
+
+.ant-dropdown-menu {
+  background-color: #f36805 !important;
+  color: white;
+}
+
+.logoutIcon {
+  color: white;
+}
+
+.ant-dropdown-menu-item, a {
+  color: white !important;
+}
+
+

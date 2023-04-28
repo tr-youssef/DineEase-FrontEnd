@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { callAPI } from "../../../utils/FetchData.jsx";
 import AntTable from "../../../components/AntTable/AntTable.jsx";
 import { FormOutlined } from "@ant-design/icons";
