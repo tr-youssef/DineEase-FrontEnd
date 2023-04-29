@@ -14,7 +14,6 @@ const bookedId = params.id
 // const pdf = BillReceipt ("644b0e51f2857264bad11034")
 useEffect (() => {
     callAPI(`http://localhost:5001/orders/getOrder/${bookedId}`, "GET", "", user.token).then((res) => {
-   console.log('res.items', res.items)
     const pdf = BillReceipt({order: res}, {items: res.items})
     setPDF(pdf)
       });
