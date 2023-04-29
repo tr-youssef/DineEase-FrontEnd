@@ -33,7 +33,7 @@ const AlreadyOrderedData = () => {
    useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
      
-      callAPI(`http://localhost:5001/orders/alreadyOrdered`, "GET", "", user.token).then((res) => {
+      callAPI(`http://localhost:5001/orders/orderServed`, "GET", "", user.token).then((res) => {
         const result = res.map((table) => ({
           ...table,
           key: table._id,

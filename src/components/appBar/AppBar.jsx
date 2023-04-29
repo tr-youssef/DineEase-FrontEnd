@@ -25,8 +25,15 @@ function AppBar() {
     });
   }, []);
 
-  // const menuProps = { OrderReady
-  // }
+  const NumberOfDishReadyToServe = (
+    <Menu>
+      <Menu.Item key="1">Option 1</Menu.Item>
+      <Menu.Item key="2">Option 2</Menu.Item>
+      <Menu.Item key="3">Option 3</Menu.Item>
+      <Menu.Item key="4">Option 4</Menu.Item>
+    </Menu>
+  );
+
   return (
     <div className="AppBar">
       <div className="LogoContainer">
@@ -42,12 +49,11 @@ function AppBar() {
             <Badge count={NumberOfNewClient}>
               <Avatar shape="square" size="large" src={OrderLogo} />
             </Badge>
-            {/* <Dropdown */}
-              {/* menu={menuProps} > */}
-               <Badge count={0}>
-              <Avatar shape="square" size="large" src={ServeDish} />
-            </Badge>
-              {/* </Dropdown> */}
+            <Dropdown overlay={NumberOfDishReadyToServe}>
+              <Badge count={1}>
+                <Avatar shape="square" size="large" src={ServeDish} />
+              </Badge>
+            </Dropdown>
           </div>
         )}
         <div className="Profil">
