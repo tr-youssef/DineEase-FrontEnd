@@ -21,13 +21,13 @@ const AlreadyOrderedData = () => {
     },
     {
       title: "Bill",
-      dataIndex: "_id",
-      key: "_id",
-      render: (_id) => {
-        return<Link to={"/receiptPDF/" + _id}>
-          <img src={billiconimage} alt="Bill!" />
+      dataIndex: "bookingId",
+      key: "bookingId",
+      render: (bookingId) => (
+        <Link to={"/receiptPDF/" + bookingId}>
+          <img src={billiconimage} alt="Bill" />
         </Link>
-      },
+      ),
     },
   ];
    useEffect(() => {
@@ -39,7 +39,6 @@ const AlreadyOrderedData = () => {
           key: table._id,
         }));
         setAlreadyOrderedData(result);
-        console.log('result', result)
       });
   }, []);
   return (
