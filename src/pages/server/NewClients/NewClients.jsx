@@ -38,10 +38,11 @@ const NewClientData = () => {
           key: table._id,
         }));
         setAvailableData(result);
+        console.log('result', result)
       });
   }, []);
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "-50px" }}>
+    <div className="ClientsTable">
       <AntTable dataSource={availableData} Columns={Columns} />
     </div>
   );

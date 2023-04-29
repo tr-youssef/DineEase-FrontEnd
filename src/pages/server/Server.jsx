@@ -2,7 +2,7 @@
 import { Tabs } from "antd";
 import React, { useEffect, useState } from "react";
 import NewClient from "./NewClients/NewClients.jsx";
-import AlreadyOrdered from "./AlreadyOrdered/AlreadyOrdered.jsx";
+import PendingPayments from "./PendingPayments/PendingPayments.jsx"
 
 const Server = () => {
 
@@ -24,8 +24,8 @@ const items = [
   },
   {
     key: "2",
-    label: `Already ordered`,
-    children: <AlreadyOrdered  />,
+    label: `Pending Payments`,
+    children: <PendingPayments  />,
   },
 ];
 

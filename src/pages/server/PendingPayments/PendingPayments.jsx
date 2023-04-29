@@ -1,7 +1,7 @@
 import billiconimage from "../../../assets/BillIcon.png";
 import AntTable from "../../../components/AntTable/AntTable.jsx";
 import { Link } from "react-router-dom";
-import "./alreadyOrderedData.css";
+import "./PendingPayments.css";
 import { callAPI } from "../../../utils/FetchData.jsx";
 import { useEffect, useState } from "react";
 
@@ -72,7 +72,7 @@ const AlreadyOrderedData = () => {
 
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "-50px" }}>
+    <div className="ClientsTable">
       <AntTable dataSource={alreadyOrderedData} Columns={Columns} />
     </div>
   );
