@@ -37,12 +37,16 @@ function AppBar() {
       <div className="NotificationProfile">
         {role === "server" && (
           <div className="Notification">
-            <Badge count={NumberOfNewClient}>
-              <Avatar shape="square" size="large" src={OrderLogo} />
-            </Badge>
-            <Badge count={0}>
-              <Avatar shape="square" size="large" src={ServeDish} />
-            </Badge>
+            <div className="NotificationItem">
+              <Badge count={NumberOfNewClient}>
+                <Avatar shape="square" size="large" src={OrderLogo} />
+              </Badge>
+            </div>
+            <div className="NotificationItem">
+              <Badge count={0}>
+                <Avatar shape="square" size="large" src={ServeDish} />
+              </Badge>
+            </div>
           </div>
         )}
         <div className="Profil">

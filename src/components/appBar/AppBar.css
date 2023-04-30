@@ -13,7 +13,7 @@
 }
 .Clock {
   display: flex;
-  font-size: 250%;
+  font-size: 150%;
   align-items: center;
 }
 .ServeDishLogo {
@@ -24,8 +24,11 @@
 }
 .NotificationProfile {
   display: flex;
-  gap: 0px;
-  margin-top: 10px;
-  justify-content: space-between;
 }
-
+.Notification {
+  display: flex;
+  align-items: center;
+}
+.NotificationItem {
+  margin-right: 20px;
+}
