@@ -40,7 +40,7 @@ const AlreadyOrderedData = () => {
  
   
   useEffect(() => { 
-      callAPI(`http://localhost:5001/orders/alreadyOrdered`, "GET", "", user.token).then((res) => {
+      callAPI(`http://localhost:5001/orders/alreadyServed`, "GET", "", user.token).then((res) => {
         const result = res.map((table) => ({
           ...table,
           key: table._id,

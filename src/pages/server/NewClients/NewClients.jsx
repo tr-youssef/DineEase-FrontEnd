@@ -38,7 +38,6 @@ const NewClientData = () => {
           key: table._id,
         }));
         setAvailableData(result);
-        console.log('result', result)
       });
   }, []);
   return (
