@@ -18,6 +18,7 @@ import AddTable from "./pages/manager/tables/AddTable/AddTable.jsx";
 import EditForm from "./pages/manager/users/EditForm/EditForm.jsx";
 import EditTable from "./pages/manager/tables/EditTable/EditTable";
 import Chef from "./pages/chef/Chef.jsx";
+import ReceiptPDF from "./components/ReceiptPDF/ReceiptPDF";
 
 const router = createBrowserRouter([
   { path: "/signin", element: <SignIn /> },
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
         element: <RequireAuth children={<TakeOrder />} isAllowed={"server"} />,
       },
       {
+        path: "receiptPDF/:id",
+        element: <ReceiptPDF />
+      },
+      {
         path: "chef",
         element: <RequireAuth children={<Chef />} isAllowed={"chef"} />,
       },
@@ -107,6 +112,7 @@ const router = createBrowserRouter([
         path: "receptionist",
         element: <RequireAuth children={<Receptionist />} isAllowed={"receptionist"} />,
       },
+
     ],
   },
 ]);

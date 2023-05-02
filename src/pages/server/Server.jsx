@@ -1,10 +1,19 @@
 
 import { Tabs } from "antd";
+import React, { useEffect, useState } from "react";
 import NewClient from "./NewClients/NewClients.jsx";
-import AlreadyOrdered from "./AlreadyOrdered/AlreadyOrdered.jsx";
+import PendingPayments from "./PendingPayments/PendingPayments.jsx"
 
 const Server = () => {
- 
+
+  const [activeTabKey, setActiveTabKey] = useState(
+    localStorage.getItem("activeTabKey") || "1"
+  );
+
+  const onTabChange = (key) => {
+    setActiveTabKey(key);
+    localStorage.setItem("activeTabKey", key);
+  };
 
   
 const items = [
@@ -15,14 +24,22 @@ const items = [
   },
   {
     key: "2",
-    label: `Already ordered`,
-    children: <AlreadyOrdered  />,
+    label: `Pending Payments`,
+    children: <PendingPayments  />,
   },
 ];
+
+useEffect(() => {
+  const storedTabKey = localStorage.getItem("activeTabKey");
+  if (storedTabKey) {
+    setActiveTabKey(storedTabKey);
+  }
+}, []);
+
   return (
-  <div className="tabs-container">
-    <Tabs defaultActiveKey="1" items={items} />
-    </div>
+      <div>
+        <Tabs activeKey={activeTabKey} items={items} onChange={onTabChange} />
+      </div>
   )
 }
 

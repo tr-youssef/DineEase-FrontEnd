@@ -41,7 +41,7 @@ const NewClientData = () => {
       });
   }, []);
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "-50px" }}>
+    <div className="ClientsTable">
       <AntTable dataSource={availableData} Columns={Columns} />
     </div>
   );
