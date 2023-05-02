@@ -34,7 +34,7 @@ const NewClientData = () => {
   useEffect(() => {
    callAPI(`http://localhost:5001/booked/availableTables`, "GET", "", user.token).then((res) => {
         const result = res.map((table) => ({
-          ...table,
+         ...table, 
           key: table._id,
         }));
         setAvailableData(result);
