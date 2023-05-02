@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { callAPI } from "../../../utils/FetchData.jsx";
 import { Link } from "react-router-dom";
 import { EditFilled, CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
@@ -84,7 +83,7 @@ function Users() {
         <div className="Icons">
           <div>
             <Link to={`editEmployee/${record._id}`}>
-              <EditFilled onClick={() => editEmployee(record._id)} />
+              <EditFilled />
             </Link>
           </div>
           <div>

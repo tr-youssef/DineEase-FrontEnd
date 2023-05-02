@@ -64,6 +64,7 @@ export const router = createBrowserRouter([
         path: "chef",
         element: <RequireAuth children={<Chef />} isAllowed={"chef"} />,
       },
+
     ],
   },
 ]);

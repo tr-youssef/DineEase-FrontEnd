@@ -30,9 +30,16 @@ function Order({ booked, order, setOrder }) {
       status: "New",
     };
     callAPI("http://localhost:5001/orders", "POST", data, user?.token).then(() => {
-      navigate("/server");
-    });
+      const statusTable = {
+        status: "AlreadyOrdered",
+      };
+      callAPI(`http://localhost:5001/booked/bookedStatus/${booked._id}`, "PATCH", statusTable, user.token).then(() => {
+        navigate("/server");
+      })
+
   }
+  )};
+   
   return (
     <div className="Order">
       <div className="OrderTop">
