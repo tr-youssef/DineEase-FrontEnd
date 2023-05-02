@@ -22,10 +22,6 @@ import ReceiptPDF from "./components/ReceiptPDF/ReceiptPDF";
 
 const router = createBrowserRouter([
   { path: "/signin", element: <SignIn /> },
-        {
-        path: "receiptPDF/:id",
-        element: <ReceiptPDF />
-      },
   {
     path: "/",
     element: <RequireAuth children={<App />} isAllowed={"all"} />,
@@ -103,6 +99,10 @@ const router = createBrowserRouter([
       {
         path: "server/takeorder/:id",
         element: <RequireAuth children={<TakeOrder />} isAllowed={"server"} />,
+      },
+      {
+        path: "receiptPDF/:id",
+        element: <ReceiptPDF />
       },
       {
         path: "chef",
