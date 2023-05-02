@@ -29,7 +29,7 @@ function Order({ booked, order, setOrder }) {
       totalAmount: Math.round((item + item * 0.05 + Number.EPSILON) * 100) / 100,
       status: "New",
     };
-    callAPI("http://localhost:5001/orders", "POST", data, user?.token).then(() => {
+    callAPI("http://localhost:5001/orders", "POST", data, user.token).then(() => {
       const statusTable = {
         status: "AlreadyOrdered",
       };
