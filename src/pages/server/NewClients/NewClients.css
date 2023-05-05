@@ -1,3 +1,8 @@
+.BookinIcon {
+  width: 40px;
+  height: 40px;
+}
+
 .ClientsTable {
   display: flex;
   justify-content: center;

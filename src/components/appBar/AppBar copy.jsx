@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./AppBar.css";
 import { ClockCircleTwoTone, CheckCircleTwoTone } from "@ant-design/icons";
 import { Badge, Avatar, Dropdown } from "antd";
@@ -9,14 +9,14 @@ import ServeDish from "../../assets/servingDish.png";
 import { useEffect, useState } from "react";
 import { callAPI } from "../../utils/FetchData";
 import { NotifContext } from "../../utils/Context.jsx";
-import { socket } from "../../utils/Socket.jsx";
 
 function AppBar() {
   let auth = JSON.parse(localStorage.getItem("user"));
   const avatar = "https://i.pravatar.cc/100";
   const name = auth?.firstName + " " + auth?.lastName;
   const role = auth?.role;
-  const { NumberOfNewClient, setNumberOfNewClient, NumberOfOrdersReady, setNumberOfOrdersReady } = useContext(NotifContext);
+  const [NumberOfNewClient, setNumberOfNewClient] = useState(0);
+  const [NumberOfOrdersReady, setNumberOfOrdersReady] = useState(0);
   const [ordersReady, setOrdersReady] = useState([]);
 
   useEffect(() => {
@@ -40,30 +40,11 @@ function AppBar() {
     });
   }, []);
 
-  useEffect(() => {
-    socket.connect();
-    socket.on("ordersReady", (ordersReady) => {
-      callAPI(`http://localhost:5001/orders/orderReady`, "GET", "", auth.token).then((res) => {
-        const result = res.map((table) => ({
-          ...table,
-          key: table._id,
-        }));
-        setNumberOfOrdersReady(result.length);
-        setOrdersReady(result);
-      });
-    });
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
   function changeStatusToServed(order) {
     const statusOrder = {
       status: "Served",
     };
-    callAPI(`http://localhost:5001/orders/status/${order._id}`, "PATCH", statusOrder, auth.token).then(() => {
-      setOrdersReady(ordersReady.filter((data) => order.bookedId._id !== data.bookedId._id));
-    });
+    callAPI(`http://localhost:5001/orders/status/${order._id}`, "PATCH", statusOrder, auth.token);
     if (NumberOfOrdersReady > 0) setNumberOfOrdersReady(NumberOfOrdersReady - 1);
   }
   function DataOfDishReadyToServer() {

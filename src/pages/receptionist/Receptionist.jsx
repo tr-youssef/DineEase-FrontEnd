@@ -5,9 +5,7 @@ import FilledData from "./Filled/Filled.jsx";
 import "./Receptionist.css";
 
 function Receptionist() {
-  const [activeTabKey, setActiveTabKey] = useState(
-    localStorage.getItem("activeTabKey") || "1"
-  );
+  const [activeTabKey, setActiveTabKey] = useState(localStorage.getItem("activeTabKey") || "1");
 
   const onTabChange = (key) => {
     setActiveTabKey(key);
@@ -37,11 +35,10 @@ function Receptionist() {
   return (
     <div className="Receptionist">
       <div>
-        <Tabs activeKey={activeTabKey} items={items} onChange={onTabChange} />
+        <Tabs activeKey={activeTabKey} items={items} onChange={onTabChange} destroyInactiveTabPane={true} />
       </div>
     </div>
   );
 }
 
 export default Receptionist;
-  

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
 import LineOrder from "./lineOrder/LineOrder.jsx";
 import TotalPrice from "../totalPrice/TotalPrice.jsx";
 import { callAPI } from "../../utils/FetchData.jsx";
 import "./Order.css";
+import { NotifContext } from "../../utils/Context.jsx";
 
 function Order({ booked, order, setOrder }) {
+  const { NumberOfNewClient, setNumberOfNewClient } = useContext(NotifContext);
   const navigate = useNavigate();
   const bookedId = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -29,17 +31,18 @@ function Order({ booked, order, setOrder }) {
       totalAmount: Math.round((item + item * 0.05 + Number.EPSILON) * 100) / 100,
       status: "New",
     };
+
     callAPI("http://localhost:5001/orders", "POST", data, user?.token).then(() => {
       const statusTable = {
         status: "AlreadyOrdered",
       };
-      callAPI(`http://localhost:5001/booked/bookedStatus/${booked._id}`, "PATCH", statusTable, user.token).then(() => {
+      callAPI(`http://localhost:5001/booked/bookedStatus/${booked.id}`, "PATCH", statusTable, user.token).then(() => {
         navigate("/server");
-      })
-
+      });
+    });
+    setNumberOfNewClient(NumberOfNewClient - 1);
   }
-  )};
-   
+
   return (
     <div className="Order">
       <div className="OrderTop">
