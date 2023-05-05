@@ -35,7 +35,7 @@ export function EditTable() {
             },
             {
               name: ["selectedServerId"],
-              value: response.userId.firstName,
+              value: response.userId._id,
             },
           ]);
         })
@@ -52,7 +52,7 @@ export function EditTable() {
     };
 
     if (id) {
-      callAPI(`http://localhost:5001/tables/${id}`, "PATCH", data, token)
+      callAPI(`http://localhost:5001/tables/status/${id}`, "PATCH", data, token)
         .then((response) => {
           navigate("/manager/tables");
         })
