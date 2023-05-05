@@ -37,6 +37,10 @@ export function EditTable() {
               name: ["selectedServerId"],
               value: response.userId._id,
             },
+            {
+              name: ["status"],
+              value: response.status,
+            },
           ]);
         })
         .catch((error) => console.log(error));
@@ -48,7 +52,7 @@ export function EditTable() {
       nameOfTable: values.nameOfTable,
       capacity: values.capacity,
       userId: values.selectedServerId,
-      status: "available",
+      status: fields[3].value,
     };
 
     if (id) {
