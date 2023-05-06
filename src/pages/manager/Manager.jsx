@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import SideMenu from "../../components/sideMenu/SideMenu.jsx";
 import { MailOutlined } from "@ant-design/icons";
-import "./manager.css";
+import "./Manager.css";
 
 function Manager() {
   function getItem(label, key, icon, children, type) {
