@@ -3,21 +3,20 @@ import "./AppBar.css";
 import { ClockCircleTwoTone } from "@ant-design/icons";
 import { Badge, Avatar, Dropdown, Menu } from "antd";
 import Clock from "../clock/Clock.jsx";
-import Profil from "../profil/profil.jsx";
+import Profil from "../profil/Profil.jsx";
 import OrderLogo from "../../assets/menu1.png";
 import ServeDish from "../../assets/servingDish.png";
 import { useEffect, useState } from "react";
 import { callAPI } from "../../utils/FetchData";
 
 function AppBar() {
-  
   let auth = JSON.parse(localStorage.getItem("user"));
   const avatar = "https://i.pravatar.cc/100";
   const name = auth?.firstName + " " + auth?.lastName;
   const role = auth?.role;
   const [NumberOfNewClient, setNumberOfNewClient] = useState(0);
-   const [NumberOfOrdersReady, setNumberOfOrdersReady] = useState(0);
-   const [ordersReady, setOrdersReady] = useState([]);
+  const [NumberOfOrdersReady, setNumberOfOrdersReady] = useState(0);
+  const [ordersReady, setOrdersReady] = useState([]);
 
   useEffect(() => {
     callAPI(`http://localhost:5001/booked/availableTables`, "GET", "", auth.token).then((res) => {
@@ -29,7 +28,7 @@ function AppBar() {
     });
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     callAPI(`http://localhost:5001/orders/orderReady`, "GET", "", auth.token).then((res) => {
       const result = res.map((table) => ({
         ...table,
@@ -50,18 +49,18 @@ function AppBar() {
   }, []);
 
   const NumberOfDishReadyToServe = (
-    
     <Menu>
       {ordersReady.length > 0 ? (
         ordersReady.map((order) => (
-          <Menu.Item 
-          onClick={() => {
-            const statusOrder = {
-              status: "Served",
-            };
-            callAPI(`http://localhost:5001/orders/status/${order._id}`, "PATCH", statusOrder, auth.token);
-          }}
-          key={order._id}>
+          <Menu.Item
+            onClick={() => {
+              const statusOrder = {
+                status: "Served",
+              };
+              callAPI(`http://localhost:5001/orders/status/${order._id}`, "PATCH", statusOrder, auth.token);
+            }}
+            key={order._id}
+          >
             {order.bookedId.tableId.nameOfTable}
           </Menu.Item>
         ))
@@ -70,7 +69,6 @@ function AppBar() {
       )}
     </Menu>
   );
-  
 
   return (
     <div className="AppBar">
