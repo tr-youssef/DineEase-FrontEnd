@@ -15,8 +15,8 @@ export function EditTable() {
   const [servers, setServers] = useState([]);
 
   useEffect(() => {
-    callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", null, token).then((data) => {
-      setServers(data);
+    callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", "", token).then((res) => {
+      setServers(res);
     });
   }, []);
 

@@ -13,7 +13,7 @@ export function TableForm() {
   const [servers, setServers] = useState([]);
 
   useEffect(() => {
-    callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", null, token)
+    callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", "", token)
       .then((data) => {
         setServers(data);
       })

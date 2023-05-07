@@ -26,7 +26,7 @@ function Tables() {
   useEffect(() => {
     let fetchData = async () => {
       try {
-        const serverRes = await callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", null, token);
+        const serverRes = await callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", "", token);
         setServers(serverRes);
         const res = await callAPI(`${import.meta.env.VITE__API_URL}/tables`, "GET", "", token);
 
