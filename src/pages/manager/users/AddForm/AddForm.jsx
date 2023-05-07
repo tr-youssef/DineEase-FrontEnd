@@ -116,7 +116,6 @@ export function AddForm() {
               ]}
             >
               <Select className="EmployeeInput" placeholder="Select the role of the employee" size="middle">
-                <Option value="manager">Manager</Option>
                 <Option value="chef">Chef</Option>
                 <Option value="server">Server</Option>
                 <Option value="receptionist">Receptionist</Option>
