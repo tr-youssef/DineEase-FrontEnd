@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { callAPI } from "../../../utils/FetchData.jsx";
 import AntTable from "../../../components/AntTable/AntTable.jsx";
