@@ -35,7 +35,11 @@ export function EditTable() {
             },
             {
               name: ["selectedServerId"],
-              value: response.userId.firstName,
+              value: response.userId._id,
+            },
+            {
+              name: ["status"],
+              value: response.status,
             },
           ]);
         })
@@ -48,11 +52,11 @@ export function EditTable() {
       nameOfTable: values.nameOfTable,
       capacity: values.capacity,
       userId: values.selectedServerId,
-      status: "available",
+      status: fields[3].value,
     };
 
     if (id) {
-      callAPI(`${import.meta.env.VITE__API_URL}/tables/${id}`, "PATCH", data, token)
+      callAPI(`${import.meta.env.VITE__API_URL}/tables/status/${id}`, "PATCH", data, token)
         .then((response) => {
           navigate("/manager/tables");
         })

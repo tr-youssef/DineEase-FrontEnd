@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
 import LineOrder from "./lineOrder/LineOrder.jsx";
 import TotalPrice from "../totalPrice/TotalPrice.jsx";
 import { callAPI } from "../../utils/FetchData.jsx";
 import "./Order.css";
+import { NotifContext } from "../../utils/Context.jsx";
 
 function Order({ booked, order, setOrder }) {
+  const { NumberOfNewClient, setNumberOfNewClient } = useContext(NotifContext);
   const navigate = useNavigate();
   const bookedId = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -37,6 +39,7 @@ function Order({ booked, order, setOrder }) {
         navigate("/server");
       });
     });
+    setNumberOfNewClient(NumberOfNewClient - 1);
   }
 
   return (

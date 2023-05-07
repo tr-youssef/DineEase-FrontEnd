@@ -2,6 +2,7 @@ import ordericonimage from "../../../assets/OrderIcon.png";
 import AntTable from "../../../components/AntTable/AntTable.jsx";
 import { Link } from "react-router-dom";
 import { callAPI } from "../../../utils/FetchData.jsx";
+import "./NewClients.css";
 import { useEffect, useState } from "react";
 
 const NewClientData = () => {

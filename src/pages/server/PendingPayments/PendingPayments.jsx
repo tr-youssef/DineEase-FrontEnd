@@ -26,7 +26,7 @@ const AlreadyOrderedData = () => {
       key: "_id",
       render: (_id, record) => {
         return (
-          <Link to={"/receiptPDF/" + _id}>
+          <Link to={"/receiptPDF/" + _id} target="_blank">
             <img src={billiconimage} alt="Bill!" onClick={() => changeBookedStatus(record.bookedId, record.tableId, record._id)} />
           </Link>
         );
@@ -52,13 +52,10 @@ const AlreadyOrderedData = () => {
       const statusTable = {
         status: "available",
       };
-      callAPI(`${import.meta.env.VITE__API_URL}/tables/status/${tableId}`, "PATCH", statusTable, user.token).then(() => {
-        const statusOrder = {
-          status: "empty",
-        };
-        callAPI(`${import.meta.env.VITE__API_URL}/orders/status/${_id}`, "PATCH", statusOrder, user.token);
-      });
+      callAPI(`${import.meta.env.VITE__API_URL}/tables/status/${tableId}`, "PATCH", statusTable, user.token);
     });
+
+    setAlreadyOrderedData(alreadyOrderedData.filter((data) => data.tableId !== tableId));
   }
 
   return (
