@@ -5,7 +5,7 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import { callAPI } from "../../../../utils/FetchData.js";
 import "./AddForm.css";
 
-export function AddForm () {
+export function AddForm() {
   const navigate = useNavigate();
   const id = useParams();
   const token = JSON.parse(localStorage.getItem("user")).token;
@@ -51,11 +51,11 @@ export function AddForm () {
     };
 
     if (Object.keys(id).length === 0) {
-      callAPI("http://localhost:5001/users/signup", "POST", data, token).then(() => {
+      callAPI(`${import.meta.env.VITE__API_URL}/users/signup`, "POST", data, token).then(() => {
         navigate("/manager/users");
       });
     } else {
-      callAPI(`http://localhost:5001/users/${id}`, "PATCH", data, token).then(() => {
+      callAPI(`${import.meta.env.VITE__API_URL}/users/${id}`, "PATCH", data, token).then(() => {
         navigate("/manager/users");
       });
     }
@@ -67,13 +67,8 @@ export function AddForm () {
   return (
     <div className="AddEmployeeForm">
       <div>
-      <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
-        <Form
-          name="addEmployee"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
+        <Button icon={<ArrowLeftOutlined />} onClick={handleClick} style={{ background: "#f36805", color: "#FFFFFF", fontSize: "16px", float: "Right", width: "100px" }} size={"large"} />
+        <Form name="addEmployee" onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
           <div className="row">
             <div className="column">
               <Form.Item
@@ -171,7 +166,6 @@ export function AddForm () {
       </div>
     </div>
   );
-};
-
+}
 
 export default AddForm;

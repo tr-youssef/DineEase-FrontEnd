@@ -5,7 +5,7 @@ import { callAPI } from "../../../utils/FetchData.jsx";
 import { useEffect, useState } from "react";
 
 const NewClientData = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const [availableData, setAvailableData] = useState([]);
   const Columns = [
     {
@@ -32,13 +32,13 @@ const NewClientData = () => {
   ];
 
   useEffect(() => {
-   callAPI(`http://localhost:5001/booked/availableTables`, "GET", "", user.token).then((res) => {
-        const result = res.map((table) => ({
-          ...table,
-          key: table._id,
-        }));
-        setAvailableData(result);
-      });
+    callAPI(`${import.meta.env.VITE__API_URL}/booked/availableTables`, "GET", "", user.token).then((res) => {
+      const result = res.map((table) => ({
+        ...table,
+        key: table._id,
+      }));
+      setAvailableData(result);
+    });
   }, []);
   return (
     <div className="ClientsTable">

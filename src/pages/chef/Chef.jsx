@@ -9,7 +9,7 @@ function Chef() {
   const token = JSON.parse(localStorage.getItem("user"))?.token;
   useEffect(() => {
     let fetchData = async () => {
-      await callAPI("http://localhost:5001/orders", "GET", {}, token).then((res) => {
+      await callAPI(`${import.meta.env.VITE__API_URL}/orders`, "GET", {}, token).then((res) => {
         setOrders(res);
       });
     };
@@ -29,7 +29,7 @@ function Chef() {
 
   async function changeStatus(id) {
     const data = { status: "Ready" };
-    await callAPI(`http://localhost:5001/orders/status/${id}`, "PATCH", data, token).then(() => {});
+    await callAPI(`${import.meta.env.VITE__API_URL}/orders/status/${id}`, "PATCH", data, token).then(() => {});
   }
 
   return (

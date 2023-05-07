@@ -12,7 +12,7 @@ function FilledData() {
   useEffect(() => {
     let fetchData = async () => {
       try {
-        const res = await callAPI(`http://localhost:5001/tables/filledTables/`, "GET", "", user.token);
+        const res = await callAPI(`${import.meta.env.VITE__API_URL}/tables/filledTables/`, "GET", "", user.token);
         const result = res.map((table) => ({
           ...table,
           key: table._id,

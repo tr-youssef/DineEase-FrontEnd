@@ -15,14 +15,14 @@ export function EditTable() {
   const [servers, setServers] = useState([]);
 
   useEffect(() => {
-    callAPI("http://localhost:5001/users?role=server", "GET", null, token).then((data) => {
+    callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", null, token).then((data) => {
       setServers(data);
     });
   }, []);
 
   useEffect(() => {
     if (id) {
-      callAPI(`http://localhost:5001/tables/getTable/${id}`, "GET", {}, token)
+      callAPI(`${import.meta.env.VITE__API_URL}/tables/getTable/${id}`, "GET", {}, token)
         .then((response) => {
           setFields([
             {
@@ -52,7 +52,7 @@ export function EditTable() {
     };
 
     if (id) {
-      callAPI(`http://localhost:5001/tables/${id}`, "PATCH", data, token)
+      callAPI(`${import.meta.env.VITE__API_URL}/tables/${id}`, "PATCH", data, token)
         .then((response) => {
           navigate("/manager/tables");
         })

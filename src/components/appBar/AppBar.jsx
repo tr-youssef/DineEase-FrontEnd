@@ -19,7 +19,7 @@ function AppBar() {
   const [ordersReady, setOrdersReady] = useState([]);
 
   useEffect(() => {
-    callAPI(`http://localhost:5001/booked/availableTables`, "GET", "", auth.token).then((res) => {
+    callAPI(`${import.meta.env.VITE__API_URL}/booked/availableTables`, "GET", "", auth.token).then((res) => {
       const result = res.map((table) => ({
         ...table,
         key: table._id,
@@ -29,7 +29,7 @@ function AppBar() {
   }, []);
 
   useEffect(() => {
-    callAPI(`http://localhost:5001/orders/orderReady`, "GET", "", auth.token).then((res) => {
+    callAPI(`${import.meta.env.VITE__API_URL}/orders/orderReady`, "GET", "", auth.token).then((res) => {
       const result = res.map((table) => ({
         ...table,
         key: table._id,
@@ -39,7 +39,7 @@ function AppBar() {
   }, []);
 
   useEffect(() => {
-    callAPI(`http://localhost:5001/orders/orderReady`, "GET", "", auth.token).then((res) => {
+    callAPI(`${import.meta.env.VITE__API_URL}/orders/orderReady`, "GET", "", auth.token).then((res) => {
       const result = res.map((table) => ({
         ...table,
         key: table._id,
@@ -57,7 +57,7 @@ function AppBar() {
               const statusOrder = {
                 status: "Served",
               };
-              callAPI(`http://localhost:5001/orders/status/${order._id}`, "PATCH", statusOrder, auth.token);
+              callAPI(`${import.meta.env.VITE__API_URL}/orders/status/${order._id}`, "PATCH", statusOrder, auth.token);
             }}
             key={order._id}
           >

@@ -29,17 +29,16 @@ function Order({ booked, order, setOrder }) {
       totalAmount: Math.round((item + item * 0.05 + Number.EPSILON) * 100) / 100,
       status: "New",
     };
-    callAPI("http://localhost:5001/orders", "POST", data, user?.token).then(() => {
+    callAPI(`${import.meta.env.VITE__API_URL}/orders`, "POST", data, user?.token).then(() => {
       const statusTable = {
         status: "AlreadyOrdered",
       };
-      callAPI(`http://localhost:5001/booked/bookedStatus/${booked._id}`, "PATCH", statusTable, user.token).then(() => {
+      callAPI(`${import.meta.env.VITE__API_URL}/booked/bookedStatus/${booked._id}`, "PATCH", statusTable, user.token).then(() => {
         navigate("/server");
-      })
-
+      });
+    });
   }
-  )};
-   
+
   return (
     <div className="Order">
       <div className="OrderTop">

@@ -14,7 +14,7 @@ function Users() {
 
   const employeeStatus = (id, token, status) => {
     if (id) {
-      callAPI(`http://localhost:5001/users/status/${id}`, "PATCH", { active: status }, token)
+      callAPI(`${import.meta.env.VITE__API_URL}/users/status/${id}`, "PATCH", { active: status }, token)
         .then((data) => {
           const updatedDataSource = dataSource.map((employee) => {
             if (employee._id === id) {
@@ -33,7 +33,7 @@ function Users() {
 
   useEffect(() => {
     let fetchData = async () => {
-      await callAPI(`http://localhost:5001/users`, "GET", "", token).then((res) => {
+      await callAPI(`${import.meta.env.VITE__API_URL}/users`, "GET", "", token).then((res) => {
         const result = [];
         res.map((x) => {
           x.active ? result.push({ ...x, status: "active", key: x._id }) : result.push({ ...x, status: "inactive", key: x._id });

@@ -13,7 +13,7 @@ export function TableForm() {
   const [servers, setServers] = useState([]);
 
   useEffect(() => {
-    callAPI("http://localhost:5001/users?role=server", "GET", null, token)
+    callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", null, token)
       .then((data) => {
         setServers(data);
       })
@@ -48,7 +48,7 @@ export function TableForm() {
       userId: values.selectedServerId,
       status: "Available",
     };
-    callAPI("http://localhost:5001/tables/", "POST", data, token).then(() => {
+    callAPI(`${import.meta.env.VITE__API_URL}/tables/`, "POST", data, token).then(() => {
       navigate("/manager/tables");
     });
   };

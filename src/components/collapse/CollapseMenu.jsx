@@ -14,7 +14,7 @@ function CollapseMenu({ booked, order, setOrder }) {
   const { Panel } = Collapse;
   useEffect(() => {
     let fetchData = async () => {
-      await callAPI("http://localhost:5001/categories", "GET", "", token).then((res) => {
+      await callAPI(`${import.meta.env.VITE__API_URL}/categories`, "GET", "", token).then((res) => {
         if (!res.error) setCategories(res);
       });
     };
@@ -26,14 +26,14 @@ function CollapseMenu({ booked, order, setOrder }) {
   }
   function DeleteCategory(event, id) {
     event.stopPropagation();
-    callAPI(`http://localhost:5001/categories/${id}`, "DELETE", {}, token).then((res) => {
+    callAPI(`${import.meta.env.VITE__API_URL}/categories/${id}`, "DELETE", {}, token).then((res) => {
       if (res === "Category deleted") setCategories(categories.filter((category) => category._id !== id));
     });
   }
   function onChange(key) {
     setItems([]);
     if (key.length !== 0) {
-      callAPI(`http://localhost:5001/items/getitems/${categories[key]._id}`, "GET", {}, token).then((res) => {
+      callAPI(`${import.meta.env.VITE__API_URL}/items/getitems/${categories[key]._id}`, "GET", {}, token).then((res) => {
         setItems(res);
       });
     }

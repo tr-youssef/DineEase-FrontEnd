@@ -15,7 +15,7 @@ function Tables() {
 
   function deleteTable(id) {
     const token = JSON.parse(localStorage.getItem("user")).token;
-    callAPI(`http://localhost:5001/tables/${id}`, "DELETE", {}, token).then((res) => {
+    callAPI(`${import.meta.env.VITE__API_URL}/tables/${id}`, "DELETE", {}, token).then((res) => {
       if (res === "Table deleted") {
         const updatedDataSource = dataSource.filter((table) => table.key !== id);
         setDataSource(updatedDataSource);
@@ -26,9 +26,9 @@ function Tables() {
   useEffect(() => {
     let fetchData = async () => {
       try {
-        const serverRes = await callAPI("http://localhost:5001/users?role=server", "GET", null, token);
+        const serverRes = await callAPI(`${import.meta.env.VITE__API_URL}/users?role=server`, "GET", null, token);
         setServers(serverRes);
-        const res = await callAPI("http://localhost:5001/tables", "GET", "", token);
+        const res = await callAPI(`${import.meta.env.VITE__API_URL}/tables`, "GET", "", token);
 
         const result = res.map((table) => ({
           ...table,

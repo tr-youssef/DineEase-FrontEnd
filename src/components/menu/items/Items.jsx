@@ -45,7 +45,7 @@ function Items() {
   useEffect(() => {
     if (location.pathname.split("/")[3] === "edititem") {
       let fetchData = async () => {
-        await callAPI(`http://localhost:5001/items/${id.id}`, "GET", "", token).then((res) => {
+        await callAPI(`${import.meta.env.VITE__API_URL}/items/${id.id}`, "GET", "", token).then((res) => {
           setFields([
             {
               name: ["name"],
@@ -80,19 +80,19 @@ function Items() {
           uid: "-1",
           name: fields[3].value,
           status: "done",
-          url: `http://localhost:5001/assets/${fields[3].value}`,
+          url: `${import.meta.env.VITE__API_URL}/assets/${fields[3].value}`,
         },
       ]);
   }, [fields]);
   const onFinish = (values) => {
     if (location.pathname.split("/")[3] === "additem") {
       const data = { name: values.name, price: values.price, description: values.description, categoryId: id.id, picture: values.upload[0].name };
-      callAPI(`http://localhost:5001/items`, "POST", data, token).then(() => {
+      callAPI(`${import.meta.env.VITE__API_URL}/items`, "POST", data, token).then(() => {
         navigate("/manager/menu");
       });
     } else {
       const data = { name: values.name, price: values.price, description: values.description, categoryId: fields[4].value, picture: fileList[0].name };
-      callAPI(`http://localhost:5001/items/${id.id}`, "PATCH", data, token).then(() => {
+      callAPI(`${import.meta.env.VITE__API_URL}/items/${id.id}`, "PATCH", data, token).then(() => {
         navigate("/manager/menu");
       });
     }
@@ -110,7 +110,7 @@ function Items() {
   };
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
   const deleteItem = () => {
-    callAPI(`http://localhost:5001/items/${id.id}`, "DELETE", {}, token).then(() => {
+    callAPI(`${import.meta.env.VITE__API_URL}/items/${id.id}`, "DELETE", {}, token).then(() => {
       navigate("/manager/menu");
     });
   };
@@ -165,7 +165,7 @@ function Items() {
             </div>
             <div className="ItemsInputLine">
               <Form.Item name="upload" label="Upload" getValueFromEvent={normFile}>
-                <Upload action="http://localhost:5001/upload/item" listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange} maxCount={1}>
+                <Upload action={`${import.meta.env.VITE__API_URL}/upload/item`} listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange} maxCount={1}>
                   {fileList.length >= 1 ? null : "Upload"}
                 </Upload>
               </Form.Item>

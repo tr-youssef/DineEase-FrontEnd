@@ -11,7 +11,7 @@ function AvailableData() {
   useEffect(() => {
     let fetchData = async () => {
       try {
-        const res = await callAPI(`http://localhost:5001/tables/availableTables/`, "GET", "", user.token);
+        const res = await callAPI(`${import.meta.env.VITE__API_URL}/tables/availableTables/`, "GET", "", user.token);
         const result = res.map((table) => ({
           ...table,
           key: table._id,
@@ -29,11 +29,11 @@ function AvailableData() {
       tableId: tableId,
       status: "NewClient",
     };
-    callAPI(`http://localhost:5001/booked/`, "POST", data, user.token).then(() => {
+    callAPI(`${import.meta.env.VITE__API_URL}/booked/`, "POST", data, user.token).then(() => {
       const statusTable = {
         status: "filled",
       };
-      callAPI(`http://localhost:5001/tables/status/${tableId}`, "PATCH", statusTable, user.token);
+      callAPI(`${import.meta.env.VITE__API_URL}/tables/status/${tableId}`, "PATCH", statusTable, user.token);
     });
     setDataSource(dataSource.filter((data) => data._id !== tableId));
   }

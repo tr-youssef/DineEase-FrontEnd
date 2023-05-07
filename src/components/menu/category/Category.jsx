@@ -18,7 +18,7 @@ function Category() {
   useEffect(() => {
     if (Object.keys(id).length !== 0) {
       let fetchData = async () => {
-        await callAPI(`http://localhost:5001/categories/${id.id}`, "GET", "", token).then((res) => {
+        await callAPI(`${import.meta.env.VITE__API_URL}/categories/${id.id}`, "GET", "", token).then((res) => {
           setFields([
             {
               name: ["name"],
@@ -36,12 +36,12 @@ function Category() {
   const onFinish = (values) => {
     if (Object.keys(id).length === 0) {
       const data = { name: values.name };
-      callAPI("http://localhost:5001/categories", "POST", data, token).then(() => {
+      callAPI(`${import.meta.env.VITE__API_URL}/categories`, "POST", data, token).then(() => {
         navigate("/manager/menu");
       });
     } else {
       const data = { name: values.name };
-      callAPI(`http://localhost:5001/categories/${id.id}`, "PATCH", data, token).then(() => {
+      callAPI(`${import.meta.env.VITE__API_URL}/categories/${id.id}`, "PATCH", data, token).then(() => {
         navigate("/manager/menu");
       });
     }

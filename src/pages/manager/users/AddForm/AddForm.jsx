@@ -43,11 +43,11 @@ export function AddForm() {
     };
 
     if (Object.keys(id).length === 0) {
-      callAPI("http://localhost:5001/users/signup", "POST", data, token).then(() => {
+      callAPI(`${import.meta.env.VITE__API_URL}/users/signup`, "POST", data, token).then(() => {
         navigate("/manager/users");
       });
     } else {
-      callAPI(`http://localhost:5001/users/${id}`, "PATCH", data, token).then(() => {
+      callAPI(`${import.meta.env.VITE__API_URL}/users/${id}`, "PATCH", data, token).then(() => {
         navigate("/manager/users");
       });
     }

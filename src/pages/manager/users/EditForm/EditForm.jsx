@@ -13,7 +13,7 @@ export function EditForm() {
 
   useEffect(() => {
     if (id) {
-      callAPI(`http://localhost:5001/users/${id}`, "GET", {}, token)
+      callAPI(`${import.meta.env.VITE__API_URL}/users/${id}`, "GET", {}, token)
         .then((response) => {
           setFields([
             {
@@ -59,7 +59,7 @@ export function EditForm() {
 
   const onFinish = (values) => {
     if (id) {
-      callAPI(`http://localhost:5001/users/${id}`, "PATCH", values, token)
+      callAPI(`${import.meta.env.VITE__API_URL}/users/${id}`, "PATCH", values, token)
         .then((response) => {
           navigate("/manager/users");
         })
