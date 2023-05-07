@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { callAPI } from "../../utils/FetchData";
 import { NotifContext } from "../../utils/Context.jsx";
 import { socket } from "../../utils/Socket.jsx";
+import Logo from "../../assets/Logo2.png";
 
 function AppBar() {
   let auth = JSON.parse(localStorage.getItem("user"));
@@ -88,7 +89,7 @@ function AppBar() {
   return (
     <div className="AppBar">
       <div className="LogoContainer">
-        <img className="Logo" src="/src/assets/Logo2.png" alt="Logo" />
+        <img className="Logo" src={Logo} alt="Logo" />
       </div>
       <div className="Clock">
         <ClockCircleTwoTone twoToneColor="#f36805" size={50} />
