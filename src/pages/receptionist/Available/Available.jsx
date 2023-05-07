@@ -30,7 +30,7 @@ function AvailableData() {
     };
     callAPI(`${import.meta.env.VITE__API_URL}/booked/`, "POST", data, user.token).then(() => {
       const statusTable = {
-        status: "filled",
+        status: "Filled",
       };
       callAPI(`${import.meta.env.VITE__API_URL}/tables/status/${tableId}`, "PATCH", statusTable, user.token);
     });
