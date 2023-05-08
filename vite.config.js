@@ -7,5 +7,6 @@ export default defineConfig({
   define: {
     __APP_ENV__: process.env.VITE_VERCEL_ENV,
     VITE__API_URL: process.env.VITE__API_URL,
+    VITE__SOCKET_URL: process.env.VITE__SOCKET_URL,
   },
 });
